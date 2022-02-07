@@ -10,7 +10,7 @@ def calculate_profit(file_name):
         trades_information = json.load(source)
 
     for trade in trades_information:
-        for value in ("sold", "sold"):
+        for value in ("sold", "bought"):
             if not trade[value]:
                 trade[value] = 0
         trade_profit = Decimal(trade["sold"]) - Decimal(trade["bought"])
