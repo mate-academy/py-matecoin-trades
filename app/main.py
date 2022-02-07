@@ -10,10 +10,12 @@ def calculate_profit(file_name):
     for transaction in data:
 
         if transaction['sold'] is not None:
-            profit += float(transaction['sold']) * float(transaction['matecoin_price'])
+            profit += (float(transaction['sold'])
+                       * float(transaction['matecoin_price']))
             balance -= float(transaction['sold'])
         elif transaction['bought'] is not None:
-            profit -= float(transaction['bought']) * float(transaction['matecoin_price'])
+            profit -= (float(transaction['bought'])
+                       * float(transaction['matecoin_price']))
             balance += float(transaction['bought'])
 
     with open('profit.json', mode='w') as fout:
