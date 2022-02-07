@@ -22,4 +22,3 @@ def calculate_profit(file_name):
         json.dump({"earned_money": str(earned_money),
                    "matecoin_account": str(matecoin_account)},
                   destination, indent=2)
-calculate_profit("trades.json")
