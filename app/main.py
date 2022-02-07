@@ -10,10 +10,9 @@ def calculate_profit(file_name):
         trades_information = json.load(source)
 
     for trade in trades_information:
-        if not trade["sold"]:
-            trade["sold"] = 0
-        elif not trade["bought"]:
-            trade["bought"] = 0
+        for value in ("sold", "sold"):
+            if not trade[value]:
+                trade[value] = 0
         trade_profit = Decimal(trade["sold"]) - Decimal(trade["bought"])
         earned_money += Decimal(trade["matecoin_price"]) * trade_profit
         matecoin_account += -1 * trade_profit
