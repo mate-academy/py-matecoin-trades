@@ -9,11 +9,11 @@ def calculate_profit(file_name):
     balance = 0
     for transaction in data:
 
-        if transaction['sold'] is not None:
+        if transaction['sold']:
             profit += (float(transaction['sold'])
                        * float(transaction['matecoin_price']))
             balance -= float(transaction['sold'])
-        elif transaction['bought'] is not None:
+        elif transaction['bought']:
             profit -= (float(transaction['bought'])
                        * float(transaction['matecoin_price']))
             balance += float(transaction['bought'])
