@@ -15,7 +15,7 @@ def calculate_profit(file_name):
                 trade[value] = 0
         trade_profit = Decimal(trade["sold"]) - Decimal(trade["bought"])
         earned_money += Decimal(trade["matecoin_price"]) * trade_profit
-        matecoin_account += -1 * trade_profit
+        matecoin_account -= trade_profit
 
     with open("profit.json", "a") as destination:
         json.dump({"earned_money": str(earned_money),
