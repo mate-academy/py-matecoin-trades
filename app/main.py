@@ -17,7 +17,7 @@ def calculate_profit(file_name):
             earned_money += Decimal(operation["sold"] * matecoin_price)
             matecoin_account -= Decimal(operation["sold"])
 
-        elif operation["bought"]:
+        if operation["bought"]:
             earned_money -= Decimal(operation["sold"] * matecoin_price)
             matecoin_account += Decimal(operation["sold"])
 
