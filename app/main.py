@@ -4,11 +4,12 @@ from json import dump, load
 
 def calculate_profit(trade_history):
     sum_profit = 0
-    for n in trade_history:
-        if n["bought"]:
-            sum_profit += Decimal(n["bought"]) * Decimal(n["matecoin_price"])
-        if n["sold"]:
-            sum_profit -= Decimal(n["sold"]) * Decimal(n["matecoin_price"])
+    for trade in trade_history:
+        price = Decimal(trade["matecoin_price"])
+        if trade["bought"]:
+            sum_profit += Decimal(trade["bought"]) * price
+        if trade["sold"]:
+            sum_profit -= Decimal(trade["sold"]) * price
     return sum_profit
 
 
