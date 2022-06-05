@@ -4,7 +4,6 @@ from decimal import Decimal
 
 
 def calculate_profit(filename: str):
-
     earned_money = 0
     matecoin_account = 0
 
@@ -22,7 +21,5 @@ def calculate_profit(filename: str):
             earned_money += Decimal(value['sold'] * value['matecoin_price'])
 
     with open('profit.json', 'w') as f:
-        json.dump(
-            {"earned_money": str(earned_money),
-            "matecoin_account": str(matecoin_account)
-            }, f, indent=2)
+        json.dump({"earned_money": str(earned_money),
+                   "matecoin_account": str(matecoin_account)}, f, indent=2)
