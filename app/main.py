@@ -26,7 +26,5 @@ def calculate_profit(filename: str):
             {
                 "earned_money": str(earned_money),
                 "matecoin_account": str(matecoin_account)
-            },
-            f,
-            indent=2
-        )
+            }, f, indent=2)
+
