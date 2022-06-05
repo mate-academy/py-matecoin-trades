@@ -23,7 +23,6 @@ def calculate_profit(filename: str):
 
     with open('profit.json', 'w') as f:
         json.dump(
-            {
-                "earned_money": str(earned_money),
-                "matecoin_account": str(matecoin_account)
+            {"earned_money": str(earned_money),
+            "matecoin_account": str(matecoin_account)
             }, f, indent=2)
