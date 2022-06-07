@@ -25,5 +25,6 @@ def calculate_profit(file):
         json.dump(
             {"money_profit": str(money_profit),
              "coin_account": str(coin_account)},
-            result_file
+            result_file,
+            indent=2
         )
