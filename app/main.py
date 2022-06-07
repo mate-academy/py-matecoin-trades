@@ -7,15 +7,15 @@ def calculate_profit(file_name: str) -> None:
     matecoin_account = 0
     with open(file_name, "r") as file:
         money_data = json.load(file)
-    for transaction in money_data:
+    for event in money_data:
         spent = 0
         earned = 0
-        if transaction["bought"] is not None:
-            matecoin_account += Decimal(transaction["bought"])
-            spent = Decimal(transaction["bought"]) * Decimal(transaction["matecoin_price"])
-        if transaction["sold"] is not None:
-            matecoin_account -= Decimal(transaction["sold"])
-            earned = Decimal(transaction["sold"]) * Decimal(transaction["matecoin_price"])
+        if event["bought"] is not None:
+            matecoin_account += Decimal(event["bought"])
+            spent = Decimal(event["bought"]) * Decimal(event["matecoin_price"])
+        if event["sold"] is not None:
+            matecoin_account -= Decimal(event["sold"])
+            earned = Decimal(event["sold"]) * Decimal(event["matecoin_price"])
         profit += earned - spent
     profit_data = [
         {
