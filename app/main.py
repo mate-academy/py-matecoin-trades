@@ -27,12 +27,12 @@ def calculate_profit(file_name: str):
 
     with open(file_name, "r") as f:
         for operation in json.load(f):
-            trades_stat_list = Trade(operation["bought"],
-                                     operation["sold"],
-                                     operation["matecoin_price"])
-            trades_stat_dict["earned_money"] += trades_stat_list.earned_money
+            trades_stat = Trade(operation["bought"],
+                                operation["sold"],
+                                operation["matecoin_price"])
+            trades_stat_dict["earned_money"] += trades_stat.earned_money
             trades_stat_dict[
-                "matecoin_account"] += trades_stat_list.matecoin_account
+                "matecoin_account"] += trades_stat.matecoin_account
 
     trades_stat_dict["earned_money"] = str(trades_stat_dict["earned_money"])
     trades_stat_dict["matecoin_account"] = str(
