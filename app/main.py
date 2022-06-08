@@ -3,8 +3,8 @@ from decimal import Decimal
 
 
 def calculate_profit(file_name):
-    with open(file_name) as json_file:
-        data = json.load(json_file)
+    with open(file_name) as json_income_file:
+        data = json.load(json_income_file)
     total_bought_cost = 0
     total_sold_cost = 0
     amount_of_bought_coins = 0
