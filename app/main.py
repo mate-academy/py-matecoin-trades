@@ -6,8 +6,8 @@ def calculate_profit(file_name: str):
     with open(file_name) as file:
         file_content = json.load(file)
 
-    money_total = 0
-    coins_left = 0
+    money_total = Decimal("0")
+    coins_left = Decimal("0")
 
     for transaction in file_content:
         price = Decimal(transaction["matecoin_price"])
