@@ -13,7 +13,7 @@ def calculate_profit(json_file_name):
         if deal["bought"]:
             coins_amount += Decimal(deal["bought"])
             profit -= Decimal(deal["bought"]) * Decimal(deal["matecoin_price"])
-        else:
+        if deal["sold"]:
             coins_amount -= Decimal(deal["sold"])
             profit += Decimal(deal["sold"]) * Decimal(deal["matecoin_price"])
 
