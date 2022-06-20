@@ -10,13 +10,15 @@ def calculate_profit(name: str):
         for trans in data:
             if trans["bought"] is not None:
                 money += Decimal(trans["bought"])
-                account += (Decimal(trans["bought"]) *
-                            Decimal(trans["matecoin_price"]))
+                mul1 = Decimal(trans["bought"])
+                mul2 = Decimal(trans["matecoin_price"])
+                account += mul1 * mul2
 
             if trans["sold"] is not None:
                 money -= Decimal(trans["sold"])
-                account -= (Decimal(trans["sold"]) *
-                            Decimal(trans["matecoin_price"]))
+                mul1 = Decimal(trans["sold"])
+                mul2 = Decimal(trans["matecoin_price"])
+                account -= mul1 * mul2
 
         profit = {
             "earned_money": str(money),
