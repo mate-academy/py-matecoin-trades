@@ -20,4 +20,6 @@ def calculate_profit(filename):
             earned_money += sold_amount * price
 
     with open("profit.json", "w") as profit:
-        json.dump({"earned_money": str(earned_money), "matecoin_account": str(matecoin_account)}, profit, indent=2)
+        json.dump({"earned_money": str(earned_money),
+                   "matecoin_account": str(matecoin_account)},
+                  profit, indent=2)
