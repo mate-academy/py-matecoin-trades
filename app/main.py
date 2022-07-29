@@ -8,11 +8,11 @@ def calculate_profit(file_name):
     matecoin_account = 0
     earned_money = 0
     for deal in trade_info:
-        if deal["bought"] != "null":
+        if isinstance(deal["bought"], str):
             matecoin_account += decimal.Decimal(deal["bought"])
             earned_money -= decimal.Decimal(
                 deal["bought"]) * decimal.Decimal(deal["matecoin_price"])
-        if deal["sold"] != "null":
+        if isinstance(deal["sold"], str):
             matecoin_account -= decimal.Decimal(deal["sold"])
             earned_money += decimal.Decimal(
                 deal["sold"]) * decimal.Decimal(deal["matecoin_price"])
