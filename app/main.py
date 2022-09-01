@@ -24,6 +24,3 @@ def calculate_profit(filename):
 
     with open("profit.json", "w") as f:
         json.dump(profit, f, indent=2)
-
-if __name__ == "__main__":
-    calculate_profit("trades.json")
