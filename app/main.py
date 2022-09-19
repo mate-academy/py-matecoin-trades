@@ -26,8 +26,6 @@ def calculate_profit(file_name: str):
         money_earned += (sold - bought) * price
         account += bought - sold
 
-    n = "/Users/macbook/Documents/projects/py-matecoin-trades/profit.json"
-
-    with open(n, 'w') as f:
+    with open("profit.json", "w") as f:
         json.dump({"earned_money": str(money_earned),
                    "matecoin_account": str(account)}, f, indent=2)
