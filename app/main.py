@@ -7,11 +7,10 @@ def calculate_profit(file_name: str) -> None:
         data = json.load(file)
 
     profit = []
-    null = 0
 
     for el in data:
-        sold = Decimal(el["sold"])
-        bought = Decimal(el["bought"])
+        sold = Decimal(el["sold"]) if el["sold"] else 0
+        bought = Decimal(el["bought"]) if el["bought"] else 0
         coin_price = Decimal(el["matecoin_price"])
 
         profit.append(
