@@ -7,6 +7,7 @@ def calculate_profit(file_name: str) -> None:
         data = json.load(file)
 
     profit = []
+    null = 0
 
     for el in data:
         sold = Decimal(el["sold"])
