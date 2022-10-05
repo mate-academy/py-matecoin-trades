@@ -15,18 +15,18 @@ def calculate_profit(file_name: str) -> None:
 
         profit.append(
             {
-                "earned_money": str(sold - bought * coin_price),
-                "matecoin_account": str(sold - bought)
+                "earned_money": sold - bought * coin_price,
+                "matecoin_account": sold - bought
             }
         )
 
         total_profit = {
-            "earned_money": sum([
+            "earned_money": str(sum([
                 el["earned_money"] for el in profit
-            ]),
-            "matecoin_account": sum([
+            ])),
+            "matecoin_account": str(sum([
                 el["matecoin_account"] for el in profit
-            ]),
+            ])),
         }
-    with open("profit.json", "w") as file:
-        json.dump(total_profit, file)
+        with open("profit.json", "w") as file:
+            json.dump(total_profit, file)
