@@ -2,6 +2,7 @@ import decimal
 import json
 
 
+#commit
 def calculate_profit(trade: str) -> None:
     with open(trade) as f:
         trades = json.load(f)
