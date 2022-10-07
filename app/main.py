@@ -3,9 +3,9 @@ from decimal import Decimal
 
 
 def calculate_profit(filename: str) -> None:
-
-    profit = 0
-    balance = 0
+    sold = 0
+    bought = 0
+    coins = 0
 
     with open(filename, "r") as f:
         date_coins = json.load(f)
@@ -14,15 +14,15 @@ def calculate_profit(filename: str) -> None:
         price = Decimal(transaction["matecoin_price"])
 
         if transaction["sold"]:
-            profit += Decimal(transaction["sold"]) * price
-            balance -= Decimal(transaction["sold"])
+            sold += Decimal(transaction["sold"]) * price
+            coins -= Decimal(transaction["sold"])
         if transaction["bought"]:
-            profit -= Decimal(transaction["bought"]) * price
-            balance += Decimal(transaction["bought"])
+            bought += Decimal(transaction["bought"]) * price
+            coins += Decimal(transaction["bought"])
 
     output = {
-        "earned_money": str(profit),
-        "matecoin_account": str(balance)
+        "earned_money": str(sold - bought),
+        "matecoin_account": str(coins)
     }
 
     with open("profit.json", "w") as output_file:
