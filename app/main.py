@@ -16,7 +16,8 @@ def calculate_profit(name_trades: str) -> None:
         if trades["bought"]:
             trades_dict["earned_money"] \
                 += Decimal(trades["matecoin_price"]) * -Decimal(
-                trades["bought"])
+                trades["bought"]
+            )
 
             trades_dict["matecoin_account"] += Decimal(trades["bought"])
 
@@ -32,7 +33,9 @@ def calculate_profit(name_trades: str) -> None:
 
     trades_dict["matecoin_account"] = str(trades_dict["matecoin_account"])
 
-    opo = os.path.join("/Users/bythewaters/py-matecoin-trades/profit.json")
-    with open(opo, "w") as profit:
+    file_path = os.path.join(
+        "/Users/bythewaters/py-matecoin-trades/profit.json"
+    )
+    with open(file_path, "w") as profit:
 
         json.dump(trades_dict, profit, indent=2)
