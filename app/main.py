@@ -21,8 +21,7 @@ def calculate_profit(trades_file: str) -> None:
             "earned_money": str(earned_money),
             "matecoin_account": str(matecoin_account)
         }
-    with open("C:\\Users\\User\\Desktop\\projects\\modules"
-              "\\py-matecoin-trades/profit.json", "w") as file:
+    with open("profit.json", "w") as file:
         json.dump(
             profit_dict,
             file,
