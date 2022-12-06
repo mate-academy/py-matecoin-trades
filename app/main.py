@@ -1,10 +1,10 @@
 from decimal import Decimal
 import json
+import os
 
 
 def calculate_profit(name: str) -> None:
-
-    with open(name, "r") as f:
+    with open(os.path.name, "r") as f:
         trades = json.load(f)
 
     earned_money = Decimal("0")
@@ -26,11 +26,10 @@ def calculate_profit(name: str) -> None:
         earned_money += income - costs
         matecoin_account += dec_bought - dec_sold
 
-    profit_dict = {"earned_money": str(earned_money),
-                   "matecoin_account": str(matecoin_account)}
+    profit_dict = {"earned_money": f"{earned_money}", "matecoin_account": f"{matecoin_account}"}
+    # print(os.getcwd())
 
-    with open("C:/Users/Expert/PycharmProjects/py-matecoin-trades/"
-              "profit.json", "w") as json_file:
+    with open("profit.json", "w") as json_file:
         json.dump(profit_dict, json_file, indent=2)
 
 
