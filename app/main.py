@@ -12,11 +12,13 @@ def calculate_profit(filename: json) -> None:
 
         for trade in trades:
             if trade["bought"] is not None:
-                result["earned_money"] -= Decimal(trade["bought"]) * Decimal(trade["matecoin_price"])
+                result["earned_money"] -= Decimal(
+                    trade["bought"]) * Decimal(trade["matecoin_price"])
                 result["matecoin_account"] += Decimal(trade["bought"])
 
             if trade["sold"] is not None:
-                result["earned_money"] += Decimal(trade["sold"]) * Decimal(trade["matecoin_price"])
+                result["earned_money"] += Decimal(
+                    trade["sold"]) * Decimal(trade["matecoin_price"])
                 result["matecoin_account"] -= Decimal(trade["sold"])
 
     result = {key: str(value) for key, value in result.items()}
