@@ -11,10 +11,12 @@ def calculate_profit(trade_file: str) -> None:
         trades = json.load(f)
     for i in trades:
         if i["sold"]:
-            profit["earned_money"] += Decimal(i["sold"]) * Decimal(i["matecoin_price"])
+            profit["earned_money"] += Decimal(i["sold"]) * Decimal(
+                i["mate-coin_price"])
             profit["matecoin_account"] -= Decimal(i["sold"])
         if i["bought"]:
-            profit["earned_money"] -= Decimal(i["bought"]) * Decimal(i["matecoin_price"])
+            profit["earned_money"] -= Decimal(i["bought"]) * Decimal(
+                i["matecoin_price"])
             profit["matecoin_account"] += Decimal(i["bought"])
 
     profit["earned_money"] = str(profit["earned_money"])
