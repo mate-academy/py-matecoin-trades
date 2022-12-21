@@ -1,25 +1,33 @@
+from decimal import Decimal
 import json
-from decimal import Decimal as Decimal
 
 
-def calculate_profit(trade_file: str) -> None:
-    profit = {
-        "earned_money": Decimal(0),
-        "matecoin_account": Decimal(0)
-    }
-    with open(trade_file, "r") as f:
-        trades = json.load(f)
-        for i in trades:
-            if i["sold"]:
-                profit["earned_money"] += Decimal(i["sold"]) * Decimal(
-                    i["mate-coin_price"])
-                profit["matecoin_account"] -= Decimal(i["sold"])
-            if i["bought"]:
-                profit["earned_money"] -= Decimal(i["bought"]) * Decimal(
-                    i["matecoin_price"])
-                profit["matecoin_account"] += Decimal(i["bought"])
+def calculate_profit(trades: json) -> None:
+    result_transaction_string = {"earned_money": 0, "matecoin_account": 0}
+    with open(trades, "r") as read_file:
+        trades_info = json.load(read_file)
 
-    profit["earned_money"] = str(profit["earned_money"])
-    profit["matecoin_account"] = str(profit["matecoin_account"])
-    with open("profit.json", "w") as f:
-        json.dump(profit, f, indent=2)
+        for transaction in trades_info:
+            if transaction["bought"] is not None:
+                result_transaction_string["earned_money"] -= (
+                    Decimal(transaction["bought"])
+                    * Decimal(transaction["matecoin_price"])
+                )
+
+                result_transaction_string["matecoin_account"] += Decimal(
+                    transaction["bought"]
+                )
+
+            if transaction["sold"] is not None:
+                result_transaction_string["earned_money"] += (Decimal(
+                    transaction["sold"]
+                ) * Decimal(transaction["matecoin_price"]))
+                result_transaction_string["matecoin_account"] -= Decimal(
+                    transaction["sold"]
+                )
+
+    for key, value in result_transaction_string.items():
+        result_transaction_string[key] = str(value)
+
+    with open("profit.json", "w") as result_file:
+        json.dump(result_transaction_string, result_file, indent=2)
