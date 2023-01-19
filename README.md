@@ -2,6 +2,7 @@
 
 - Read [the guideline](https://github.com/mate-academy/py-task-guideline/blob/main/README.md) before start
 
+
 You have made some trades with the new cryptocurrency "Matecoin".
 In order to calculate profit you loaded json-file `trades.json` with 
 trades description. Content of that file is `list of JavaScript Objects`,
