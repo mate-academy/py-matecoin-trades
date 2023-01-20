@@ -1,1 +1,17 @@
-# write your code here
+import json
+from decimal import Decimal
+
+
+def calculate_profit(name_file: str):
+    with open("app.trades.json", "r") as trade_info, open("app.profit.json", "w"):
+        transactions_data = json.load(trade_info)
+        matecoin_account = 0
+        profit = 0
+        for trades in transactions_data:
+            if trades["bought"] is None:
+                trades["bought"] = 0
+            if trades["sold"] is None:
+                trades["sold"] = 0
+
+            profit += (Decimal(trades["sold"]) - Decimal(trades["bought"])) * Decimal(trades["matecoint_price"])
+            matecoin_account += Decimal(trades["bought"]) - Decimal(trades["sold"])
