@@ -2,8 +2,8 @@ import json
 import decimal
 
 
-def calculate_profit() -> None:
-    with open("trades.json") as f:
+def calculate_profit(name_in: str, name_out: str) -> None:
+    with open(name_in) as f:
         money_report = json.load(f)
     total_report = {"earned_money": 0, "matecoin_account": 0}
     for report in money_report:
@@ -21,5 +21,5 @@ def calculate_profit() -> None:
     total_report["earned_money"] = str(total_report["earned_money"])
     total_report["matecoin_account"] = str(total_report["matecoin_account"])
 
-    with open("profit.json", "w") as f:
+    with open(name_out, "w") as f:
         json.dump(total_report, f, indent=2)
