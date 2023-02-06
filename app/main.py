@@ -2,7 +2,7 @@ import json
 import decimal
 
 
-def calculate_profit(name_in: str, name_out: str) -> None:
+def calculate_profit(name_in: str, name_out: str = "profit.json") -> None:
     with open(name_in) as f:
         money_report = json.load(f)
     total_report = {"earned_money": 0, "matecoin_account": 0}
