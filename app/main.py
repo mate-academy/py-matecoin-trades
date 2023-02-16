@@ -1,6 +1,8 @@
 import decimal
 import json
 
+PROFIT_FILE = "profit.json"
+
 
 def calculate_profit(file_name: str) -> None:
     earned_money = 0
@@ -27,5 +29,5 @@ def calculate_profit(file_name: str) -> None:
     dict_to_write["earned_money"] = str(earned_money)
     dict_to_write["matecoin_account"] = str(matecoin_account)
 
-    with open("../profit.json", "w") as profit_file:
+    with open(PROFIT_FILE, "w") as profit_file:
         json.dump(dict_to_write, profit_file, indent=2)
