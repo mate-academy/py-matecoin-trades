@@ -17,7 +17,6 @@ def calculate_profit(file_name: str) -> None:
             matecoin_price = decimal.Decimal(raw.get("matecoin_price"))
             result["earned_money"] -= bought * matecoin_price
             result["matecoin_account"] += bought
-
         if raw.get("sold"):
             sold = decimal.Decimal(raw.get("sold"))
             matecoin_price = decimal.Decimal(raw.get("matecoin_price"))
