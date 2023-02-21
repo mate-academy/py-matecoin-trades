@@ -3,8 +3,11 @@ from decimal import Decimal
 
 
 def calculate_profit(trades_file: json) -> None:
-    with open(trades_file, "r") as f:
-        trades = json.load(f)
+    try:
+        with open(trades_file, "r") as f:
+            trades = json.load(f)
+    except FileNotFoundError:
+        return None
 
     earned_money = Decimal("0")
     matecoin_account = Decimal("0")
