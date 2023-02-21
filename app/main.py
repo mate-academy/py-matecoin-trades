@@ -1,13 +1,11 @@
 import json
 from decimal import Decimal
+from os import path
 
 
 def calculate_profit(trades_file: json) -> None:
-    try:
-        with open(trades_file, "r") as f:
-            trades = json.load(f)
-    except FileNotFoundError:
-        return None
+    with open(trades_file, "r") as f:
+        trades = json.load(f)
 
     earned_money = Decimal("0")
     matecoin_account = Decimal("0")
@@ -27,9 +25,5 @@ def calculate_profit(trades_file: json) -> None:
         "matecoin_account": str(matecoin_account)
     }
 
-    try:
-        with open("profit.json", "w") as f:
-            json.dump(result, f, indent=2)
-    except FileNotFoundError:
-        with open("profit.json", "a") as f:
-            json.dump(result, f, indent=2)
+    with open("profit.json", "w") as f:
+        json.dump(result, f, indent=2)
