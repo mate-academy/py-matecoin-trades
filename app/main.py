@@ -13,17 +13,16 @@ def calculate_profit(file_name: str) -> None:
 
             if transaction["sold"] is not None:
                 result["earned_money"] += (
-                        Decimal(transaction["sold"])
-                        * Decimal(transaction["matecoin_price"])
+                    Decimal(transaction["sold"])
+                    * Decimal(transaction["matecoin_price"])
                 )
                 result["matecoin_account"] -= Decimal(transaction["sold"])
 
             if transaction["bought"] is not None:
-
                 result["matecoin_account"] += Decimal(transaction["bought"])
                 result["earned_money"] -= (
-                        Decimal(transaction["bought"])
-                        * Decimal(transaction["matecoin_price"])
+                    Decimal(transaction["bought"])
+                    * Decimal(transaction["matecoin_price"])
                 )
         result["earned_money"] = str(result["earned_money"])
         result["matecoin_account"] = str(result["matecoin_account"])
