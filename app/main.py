@@ -26,5 +26,3 @@ def calculate_profit() -> None:
     print(res)
     with open("profit.json", "w") as write_json_file:
         json.dump(res, write_json_file, indent=2)
-
-calculate_profit()
