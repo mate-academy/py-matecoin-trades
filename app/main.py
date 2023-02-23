@@ -17,4 +17,4 @@ def calculate_profit(filename: str) -> None:
             result["matecoin_account"] += Decimal(deals["bought"])
     str_res = {key: str(value) for key, value in result.items()}
     with open("profit.json", "w") as file:
-        json.dump(str_res, file)
+        json.dump(str_res, file, indent=2)
