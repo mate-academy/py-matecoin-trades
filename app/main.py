@@ -1,9 +1,8 @@
-import decimal
 import json
 from decimal import Decimal
 
 
-def calculate_profit(file_name: str):
+def calculate_profit(file_name: str) -> None:
     with open(file_name, "r") as file:
         data_list = json.load(file)
     earned_money = Decimal("0")
