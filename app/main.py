@@ -1,5 +1,6 @@
 import json
 import decimal
+import os
 
 
 # write your code here
@@ -27,4 +28,7 @@ def calculate_profit(filename: str) -> None:
         "earned_money": str(earned_money),
         "matecoin_account": str(total_coins)
     }
-    json.dump(result_dict, open("profit.json", "w"))
+
+    with open(os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                           "..", "profit.json")), "w") as file:
+        json.dump(result_dict, file, indent="  ")
