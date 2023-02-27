@@ -1,32 +1,43 @@
 from decimal import Decimal
 import json
+import os
 
 
-def calculate_profit(trades_file_name: str,
-                     profit_file_name: str = None) -> None:
-    with open(trades_file_name, "r") as f:
+def calculate_profit(profit_file=None):
+    trades_file = 'trades.json'
+    if not os.path.exists(trades_file):
+        print(f"Error: {trades_file} file not found.")
+        return None
+
+    with open(trades_file, 'r') as f:
         trades = json.load(f)
 
-    matecoin_account = Decimal("0")
-    earned_money = Decimal("0")
+    earned_money = Decimal(0)
+    matecoin_account = Decimal(0)
 
     for trade in trades:
-        if trade["bought"] is not None:
-            bought = Decimal(trade["bought"])
-            matecoin_account += bought
-            earned_money -= bought * Decimal(trade["matecoin_price"])
-        elif trade["sold"] is not None:
-            sold = Decimal(trade["sold"])
-            matecoin_account -= sold
-            earned_money += sold * Decimal(trade["matecoin_price"])
+        amount = Decimal(trade['amount'])
+        price = Decimal(trade['price'])
+        fee = Decimal(trade['fee'])
 
-    result = {
-        "earned_money": str(earned_money),
-        "matecoin_account": str(matecoin_account)
-    }
+        if trade['type'] == 'buy':
+            cost = amount * price + fee
+            matecoin_account += amount
+            earned_money -= cost
+        else:
+            revenue = amount * price - fee
+            matecoin_account -= amount
+            earned_money += revenue
 
-    if profit_file_name is not None:
-        with open(profit_file_name, "w") as f:
-            json.dump(result, f)
+    if profit_file is not None:
+        with open(profit_file, 'w') as f:
+            json.dump({
+                'earned_money': str(earned_money),
+                'matecoin_account': str(matecoin_account)
+            }, f)
+        return {'earned_money': earned_money, 'matecoin_account': matecoin_account}
+    else:
+        return {'earned_money': earned_money, 'matecoin_account': matecoin_account}
 
-    return None
+if __name__ == '__main__':
+    calculate_profit(profit_file="profit.json")
