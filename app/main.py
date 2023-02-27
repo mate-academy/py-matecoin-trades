@@ -1,46 +1,28 @@
-from decimal import Decimal
 import json
-import os
+from decimal import Decimal
 
 
-def calculate_profit(profit_file: None = None) -> None:
-    trades_file = "trades.json"
-    if not os.path.exists(trades_file):
-        print(f"Error: {trades_file} file not found.")
-        return None
-
-    with open(trades_file, "r") as f:
+def calculate_profit(trades_file: None) -> None:
+    with open(trades_file) as f:
         trades = json.load(f)
 
-    earned_money = Decimal(0)
-    matecoin_account = Decimal(0)
+    coin_account = Decimal("0")
+    dollars_account = Decimal("0")
 
     for trade in trades:
-        amount = Decimal(trade["amount"])
-        price = Decimal(trade["price"])
-        fee = Decimal(trade["fee"])
+        bought = Decimal(trade["bought"])
+        sold = Decimal(trade["sold"])
+        price = Decimal(trade["matecoin_price"])
 
-        if trade["type"] == "buy":
-            cost = amount * price + fee
-            matecoin_account += amount
-            earned_money -= cost
-        else:
-            revenue = amount * price - fee
-            matecoin_account -= amount
-            earned_money += revenue
+        coin_account += bought - sold
+        dollars_account -= bought * price
+        dollars_account += sold * price
 
-    if profit_file is not None:
-        with open(profit_file, "w") as f:
-            json.dump({
-                "earned_money": str(earned_money),
-                "matecoin_account": str(matecoin_account)
-            }, f)
-        return {"earned_money": earned_money,
-                "matecoin_account": matecoin_account}
-    else:
-        return {"earned_money": earned_money,
-                "matecoin_account": matecoin_account}
+    result = {
+        "coin_account": str(coin_account),
+        "dollars_account": str(dollars_account),
+        "profit": str(dollars_account + coin_account * price)
+    }
 
-
-if __name__ == "__main__":
-    calculate_profit(profit_file="profit.json")
+    with open("profit.json", "w") as f:
+        json.dump(result, f)
