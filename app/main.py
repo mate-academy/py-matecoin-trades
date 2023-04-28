@@ -16,5 +16,6 @@ def calculate_profit(trades: str) -> None:
                 earned_money += \
                     Decimal(i["sold"]) * Decimal(i["matecoin_price"])
                 coins -= Decimal(i["sold"])
-    json.dump({"earned_money": str(earned_money - spent_money),
-               "matecoin_account": str(coins)}, profit, indent=2)
+
+        json.dump({"earned_money": str(earned_money - spent_money),
+                   "matecoin_account": str(coins)}, profit, indent=2)
