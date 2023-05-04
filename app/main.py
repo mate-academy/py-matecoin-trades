@@ -3,7 +3,7 @@ import decimal
 
 
 def calculate_profit(trades: list) -> None:
-    with open("trades.json", "r") as read_file:
+    with open("app/trades.json", "r") as read_file:
         data = json.load(read_file)
 
     earned_money = 0
@@ -14,7 +14,7 @@ def calculate_profit(trades: list) -> None:
             matecoin_account += decimal.Decimal(trade["bought"])
             earned_money -= decimal.Decimal(trade["bought"]) \
                 * decimal.Decimal(trade["matecoin_price"])
-        elif trade["sold"]:
+        if trade["sold"]:
             matecoin_account -= decimal.Decimal(trade["sold"])
             earned_money += decimal.Decimal(trade["sold"]) \
                 * decimal.Decimal(trade["matecoin_price"])
@@ -25,4 +25,4 @@ def calculate_profit(trades: list) -> None:
     }
 
     with open("profit.json", "w") as write_file:
-        json.dump(profit, write_file)
+        json.dump(profit, write_file, indent=2)
