@@ -18,9 +18,9 @@ def calculate_profit(trades_file: str) -> None:
                     amount["matecoin_price"]
                 )
                 account -= Decimal(amount["sold"])
-    os.chdir("../")
+    root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     with open(
-        os.path.join(os.getcwd(), "profit.json"),
+        os.path.join(root_dir, "profit.json"),
         "w",
     ) as profit_file:
         json.dump(
