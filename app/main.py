@@ -1,4 +1,5 @@
 import json
+import os
 from decimal import Decimal
 
 
@@ -17,9 +18,15 @@ def calculate_profit(trades_file: str) -> None:
                     amount["matecoin_price"]
                 )
                 account -= Decimal(amount["sold"])
+    home_directory = os.path.expanduser("~")
     with open(
-        "C:\\Users\\Neo\\PycharmProjects\\py-matecoin-trades\\profit.json",
-            "w"
+        os.path.join(
+            home_directory,
+            "PycharmProjects",
+            "py-matecoin-trades",
+            "profit.json",
+        ),
+        "w",
     ) as profit_file:
         json.dump(
             {"earned_money": str(profit), "matecoin_account": str(account)},
