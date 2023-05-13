@@ -1,4 +1,5 @@
 import json
+from pathlib import Path
 import os
 from decimal import Decimal
 
@@ -18,14 +19,9 @@ def calculate_profit(trades_file: str) -> None:
                     amount["matecoin_price"]
                 )
                 account -= Decimal(amount["sold"])
-    home_directory = os.path.expanduser("~")
+    os.chdir("../")
     with open(
-        os.path.join(
-            home_directory,
-            "PycharmProjects",
-            "py-matecoin-trades",
-            "profit.json",
-        ),
+        os.path.join(os.getcwd(), "profit.json"),
         "w",
     ) as profit_file:
         json.dump(
