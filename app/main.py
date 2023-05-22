@@ -1,10 +1,10 @@
-from json import load, dump
-from decimal import Decimal
+import json
+import decimal
 
 
 def calculate_profit(url: str) -> None:
     with open(url, "r") as f:
-        trade_data = load(f)
+        trade_data = json.load(f)
 
     profit = {
         "earned_money": 0,
@@ -12,15 +12,19 @@ def calculate_profit(url: str) -> None:
     }
 
     for transaction in trade_data:
-        current_price = Decimal(transaction["matecoin_price"])
-        current_trade = Decimal(
-            transaction["bought"] or ("-" + transaction["sold"])
-        )
+        current_price = decimal.Decimal(transaction["matecoin_price"])
+        current_plus = 0
+        current_minus = 0
+        if transaction["bought"] is not None:
+            current_plus = decimal.Decimal(transaction["bought"])
+        if transaction["sold"] is not None:
+            current_minus = decimal.Decimal(transaction["sold"])
 
-        profit["matecoin_account"] += current_trade
-        profit["earned_money"] -= current_trade * current_price
+        profit["matecoin_account"] += current_plus - current_minus
+        profit["earned_money"] -= \
+            (current_plus - current_minus) * current_price
 
     profit["earned_money"] = str(profit["earned_money"])
     profit["matecoin_account"] = str(profit["matecoin_account"])
     with open("profit.json", "w") as f:
-        dump(profit, f, indent=2)
+        json.dump(profit, f, indent=2)
