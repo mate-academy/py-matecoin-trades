@@ -27,5 +27,4 @@ def calculate_profit(
         json.dump(result, profit, indent=2)
 
 
-
 # calculate_profit("trades.json")
