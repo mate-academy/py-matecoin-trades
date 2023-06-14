@@ -31,4 +31,3 @@ def calculate_profit(trades: str) -> None:
         }
 
         json.dump(profit_data, file_out, indent=2)
-
