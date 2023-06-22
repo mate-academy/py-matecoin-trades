@@ -30,6 +30,6 @@ def calculate_profit(filename: str) -> None:
                 - Decimal(matecoin_account))
 
     with (
-        open("C:\\Users\\DELL\\projects\\py-matecoin-trades\\profit.json", "w")
+        open("profit.json", "w")
     ) as file:
         json.dump(profit, file, indent=2)
