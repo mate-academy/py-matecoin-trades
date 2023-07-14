@@ -2,7 +2,7 @@ import decimal
 import json
 
 
-def calculate_profit(name_of_json_file: str):
+def calculate_profit(name_of_json_file: str) -> None:
     with open(name_of_json_file) as trades_json:
         trades_file_in_python_code = json.load(trades_json)
 
@@ -11,11 +11,17 @@ def calculate_profit(name_of_json_file: str):
 
     for trade in trades_file_in_python_code:
         if trade["bought"] is not None:
-            sum_of_profit -= decimal.Decimal(trade["bought"]) * decimal.Decimal(trade["matecoin_price"])
+            sum_of_coins = decimal.Decimal(trade["bought"])
+            price_of_coin = decimal.Decimal(trade["matecoin_price"])
+
+            sum_of_profit -= sum_of_coins * price_of_coin
             sum_of_matecoin += decimal.Decimal(trade["bought"])
 
         if trade["sold"] is not None:
-            sum_of_profit += decimal.Decimal(trade["sold"]) * decimal.Decimal(trade["matecoin_price"])
+            sum_of_coins = decimal.Decimal(trade["sold"])
+            price_of_coin = decimal.Decimal(trade["matecoin_price"])
+
+            sum_of_profit += sum_of_coins * price_of_coin
             sum_of_matecoin -= decimal.Decimal(trade["sold"])
 
     with open("profit.json", "w") as profit_json:
