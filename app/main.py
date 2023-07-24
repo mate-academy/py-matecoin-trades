@@ -36,7 +36,7 @@ def calculate_profit(name_trade_file: str) -> None:
         )
 
     current_directory = os.getcwd()
-    parent_directory = os.path.join(current_directory, "..")
+    parent_directory = os.path.abspath(os.path.join(current_directory, ".."))
     new_file_path = os.path.join(parent_directory, "profit.json")
 
     with open(
