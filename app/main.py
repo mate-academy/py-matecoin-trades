@@ -34,7 +34,3 @@ def calculate_profit(file_name: str) -> None:
 
     with open(profit_path, "w") as j_file:
         json.dump(output, j_file, indent=2)
-
-
-if __name__ == '__main__':
-    calculate_profit("trades.json")
