@@ -18,10 +18,10 @@ def calculate_profit(filename: str) -> None:
                 info["sold1"] += Decimal(sell)
                 info["earned_sold"] += Decimal(sell) * Decimal(price)
 
-        progress = Decimal(info["earned_sold"]) - Decimal(info["earned_bought"])
+        progres = Decimal(info["earned_sold"]) - Decimal(info["earned_bought"])
         meta = Decimal(info["bought1"]) - Decimal(info["sold1"])
         res = {
-            "earned_money": str(progress),
+            "earned_money": str(progres),
             "matecoin_account": str(meta)
         }
 
