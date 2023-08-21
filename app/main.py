@@ -16,13 +16,13 @@ def calculate_profit(json_file: str) -> None:
         money = 0
 
         for item in loaded_json:
-            if "bought" in item and item["bought"] is not None:
+            if item.get("bought") is not None:
                 coins += Decimal(item["bought"])
                 money -= Decimal(
                     item["bought"]) * Decimal(item["matecoin_price"]
                                               )
 
-            if "sold" in item and item["sold"] is not None:
+            if item.get("sold") is not None:
                 coins -= Decimal(item["sold"])
                 money += Decimal(
                     item["sold"]) * Decimal(item["matecoin_price"]
