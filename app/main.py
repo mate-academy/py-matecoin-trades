@@ -25,7 +25,7 @@ def calculate_profit(filename: str = "trades.json") -> None:
             if sold is not None:
                 money += sold * price
                 coins -= sold
-    with open("../profit.json", "w") as f:
+    with open("profit.json", "w") as f:
         money = str(money)
         coins = str(coins)
         data = {"earned_money": money, "matecoin_account": coins}
