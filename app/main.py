@@ -23,10 +23,9 @@ def calculate_profit(trades: json) -> None:
                 )
                 wallet -= Decimal(trades[i]["sold"])
 
-    user_data = {
-        "earned_money": str(profit),
-        "matecoin_account": str(wallet)
-    }
-
     with open("profit.json", "w") as user_wallet:
-        json.dump(user_data, user_wallet, indent=2)
+        json.dump(
+            {"earned_money": str(profit), "matecoin_account": str(wallet)},
+            user_wallet,
+            indent=2
+        )
