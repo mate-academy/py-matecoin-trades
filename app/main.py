@@ -11,13 +11,13 @@ def calculate_profit(trades: json) -> None:
 
         for i in range(len(trades)):
 
-            if trades[i]["bought"] is not None:
+            if trades[i]["bought"]:
                 profit -= Decimal(trades[i]["bought"]) * (
                     Decimal(trades[i]["matecoin_price"])
                 )
                 wallet += Decimal(trades[i]["bought"])
 
-            if trades[i]["sold"] is not None:
+            if trades[i]["sold"]:
                 profit += Decimal(trades[i]["sold"]) * (
                     Decimal(trades[i]["matecoin_price"])
                 )
