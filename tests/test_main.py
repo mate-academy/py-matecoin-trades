@@ -70,9 +70,10 @@ def test_default_create_profit_file():
     with CleanUpFile(PROFIT):
         calculate_profit(TRADES)
 
+        a = PROFIT
+        print(a)
         with open(PROFIT) as actual:
             assert actual.read() == expected
-
 
 @pytest.mark.parametrize(
     "trades, profit",
