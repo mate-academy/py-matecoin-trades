@@ -32,5 +32,5 @@ def calculate_profit(trade_information_file: str) -> None:
         content = {
             "earned_money": str(earned_money),
             "matecoin_account": str(matecoin_account),
-                   }
+        }
         json.dump(content, profit_file, indent=2)
