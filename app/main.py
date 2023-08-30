@@ -8,9 +8,9 @@ def calculate_profit(trade_information_file: str) -> None:
 
     with open(trade_information_file, "r") as info_file:
 
-        trades_info = json.load(info_file)
+        trades_data = json.load(info_file)
 
-        for trade in trades_info:
+        for trade in trades_data:
             if trade["bought"] is not None:
 
                 bought = Decimal(trade["bought"])
