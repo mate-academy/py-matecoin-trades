@@ -3,11 +3,11 @@ from decimal import Decimal
 
 
 def calculate_profit(input_file: str) -> None:
-    with open(input_file, "r") as f:
-        trades = json.load(f)
-
     matecoin_account = Decimal("0")
     earned_money = Decimal("0")
+
+    with open(input_file, "r") as f:
+        trades = json.load(f)
 
     for trade in trades:
         bought = Decimal(trade.get("bought", "0") or "0")
@@ -19,12 +19,8 @@ def calculate_profit(input_file: str) -> None:
             f"sold={sold}, matecoin_price={matecoin_price}"
         )
 
-        if bought > 0:
-            matecoin_account += bought
-            earned_money -= bought * matecoin_price
-        elif sold > 0:
-            matecoin_account -= sold
-            earned_money += sold * matecoin_price
+        matecoin_account += bought - sold
+        earned_money += sold * matecoin_price - bought * matecoin_price
 
     print(
         f"Calculated profit: earned_money={earned_money}, "
