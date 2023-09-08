@@ -37,7 +37,6 @@ def calculate_profit(
         "matecoin_account": str(matecoin_account)
     }
 
-    output_file = "D:\\Python Mate\\py-matecoin-trades\\" + output_file
 
     with open(output_file, "w") as f:
         json.dump(result, f, indent=2)
