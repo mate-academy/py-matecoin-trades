@@ -20,8 +20,8 @@ def calculate_profit(json_file: str) -> None:
             coins -= Decimal(elem["sold"])
 
     output_date = {
-        "earned_money": float(result),
-        "matecoin_account": float(coins)
+        "earned_money": str(result),
+        "matecoin_account": str(coins)
     }
     output_date = json.dumps(output_date)
 
