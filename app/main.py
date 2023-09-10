@@ -11,19 +11,18 @@ def calculate_profit(json_file: str) -> None:
 
     for elem in trade_data:
         if elem["bought"]:
-            result -= \
+            result += \
                 (Decimal(elem["bought"]) * Decimal(elem["matecoin_price"]))
             coins += Decimal(elem["bought"])
 
         if elem["sold"]:
-            result += (Decimal(elem["sold"]) * Decimal(elem["matecoin_price"]))
+            result -= (Decimal(elem["sold"]) * Decimal(elem["matecoin_price"]))
             coins -= Decimal(elem["sold"])
 
     output_date = {
         "earned_money": str(result),
         "matecoin_account": str(coins)
     }
-    output_date = json.dumps(output_date)
 
     with open("profit.json", "w") as f:
-        json.dump(output_date, f)
+        json.dump(output_date, f, indent=4)
