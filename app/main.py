@@ -10,15 +10,16 @@ def calculate_profit(name_file: str) -> None:
         trader_data = json.load(file_read)
 
     for elem in trader_data:
+
         if elem["bought"]:
-            matcoin_value = Decimal(elem["bought"])
-            matecoin_account += matcoin_value
-            earned_money -= matcoin_value * Decimal(elem["matecoin_price"])
+            matecoin_account += Decimal(elem["bought"])
+            earned_money -= (Decimal(elem["bought"])
+                             * Decimal(elem["matecoin_price"]))
 
         if elem["sold"]:
-            matcoin_value = Decimal(elem["sold"])
-            matecoin_account -= matcoin_value
-            earned_money += matcoin_value * Decimal(elem["matecoin_price"])
+            matecoin_account -= Decimal(elem["sold"])
+            earned_money += (Decimal(elem["sold"])
+                             * Decimal(elem["matecoin_price"]))
 
     result_dic = {
         "earned_money": str(earned_money),
@@ -26,4 +27,4 @@ def calculate_profit(name_file: str) -> None:
     }
 
     with open("profit.json", "w") as file_write:
-        json.dump(result_dic, file_write)
+        json.dump(result_dic, file_write, indent=2)
