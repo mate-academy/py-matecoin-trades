@@ -4,7 +4,6 @@ import json
 
 def calculate_profit(name_of_file: str) -> None:
     profit = 0
-
     amount_of_crypto = 0
 
     print(name_of_file)
