@@ -4,7 +4,9 @@ import json
 
 def calculate_profit(name_of_file: str):
     profit = 0
+
     amount_of_crypto = 0
+
     print(name_of_file)
     with open(name_of_file, "r") as account_file, open("C:\\Users\\stepk\\PycharmProjects\\py-matecoin-trades\\profit.json", "a") as profit_file:
         for account in json.load(account_file):
