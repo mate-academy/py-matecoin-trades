@@ -8,9 +8,7 @@ def calculate_profit(name_of_file: str) -> None:
     amount_of_crypto = 0
 
     print(name_of_file)
-    with open(name_of_file, "r") as account_file,\
-            open("C:\\Users\\stepk\\PycharmProjects"
-                 "\\py-matecoin-trades\\profit.json", "w") as profit_file:
+    with open(name_of_file, "r") as account_file:
         for account in json.load(account_file):
             if account["bought"] is None:
                 amount_of_crypto -= decimal.Decimal(account["sold"])
@@ -30,4 +28,6 @@ def calculate_profit(name_of_file: str) -> None:
             "earned_money": str(profit),
             "matecoin_account": str(amount_of_crypto)
         }
+    with open("C:\\Users\\stepk\\PycharmProjects"
+              "\\py-matecoin-trades\\profit.json", "w") as profit_file:
         json.dump(result, profit_file, indent=2)
