@@ -18,7 +18,7 @@ def calculate_profit(filename: str) -> None:
                 matecoin_amount -= Decimal(trade["sold"])
 
     with open(
-            "D:/programming/mate/projects/py-matecoin-trades/profit.json",
+            "profit.json",
             "w"
     ) as file:
         result_string = {
