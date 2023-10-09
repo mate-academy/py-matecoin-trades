@@ -3,31 +3,32 @@ from decimal import Decimal
 
 
 def calculate_profit(filename: str) -> None:
+    earned_money = Decimal("0")
+    matecoin_account = Decimal("0")
+
+    # Read the days data from the JSON file
     with open(filename, "r") as f:
-        input_list = json.load(f)
-    output_dict = {
-        "earned_money": 0,
-        "matecoin_account": 0
+        days = json.load(f)
+
+    for day in days:
+        bought = day.get("bought")
+        sold = day.get("sold")
+        matecoin_price = Decimal(day["matecoin_price"])
+
+        if bought:
+            bought = Decimal(bought)
+            earned_money -= bought * matecoin_price
+            matecoin_account += bought
+
+        if sold:
+            sold = Decimal(sold)
+            earned_money += sold * matecoin_price
+            matecoin_account -= sold
+
+    result = {
+        "earned_money": str(earned_money),
+        "matecoin_account": str(matecoin_account)
     }
-    for day in input_list:
-        for _ in day.items():
-            if day["sold"] is None:
-                day["sold"] = 0
-            if day["bought"] is None:
-                day["bought"] = 0
-
-            bought = Decimal(day["bought"])
-            sold = Decimal(day["sold"])
-            price = Decimal(day["matecoin_price"])
-
-            output_dict["earned_money"] += ((sold - bought) * price)
-            output_dict["matecoin_account"] += (bought - sold)
-
-    output_dict["earned_money"] = str(output_dict["earned_money"])
-    output_dict["matecoin_account"] = str(output_dict["matecoin_account"])
 
     with open("profit.json", "w") as f:
-        json.dump(output_dict, f)
-
-
-calculate_profit("trades.json")
+        json.dump(result, f, indent=2)
