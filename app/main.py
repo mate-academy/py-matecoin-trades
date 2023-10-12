@@ -17,7 +17,7 @@ def calculate_profit(input_filename: str) -> None:
         if bought > 0:
             earned_money -= bought * matecoin_price
             matecoin_account += bought
-        elif sold > 0:
+        if sold > 0:
             earned_money += sold * matecoin_price
             matecoin_account -= sold
 
