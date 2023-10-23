@@ -7,6 +7,7 @@ def calculate_profit(json_file: json) -> None:
         "earned_money": Decimal("0.0"),
         "matecoin_account": Decimal("0.0")
     }
+
     with open(json_file, "r") as out:
         data = json.load(out)
         for trade in data:
