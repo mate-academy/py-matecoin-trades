@@ -13,6 +13,7 @@ def calculate_profit(file_name: str) -> None:
                              * Decimal(trade["matecoin_price"]))
 
             amount_of_coins += Decimal(trade["bought"])
+
         if trade.get("sold"):
             earned_money += (Decimal(trade["sold"])
                              * Decimal(trade["matecoin_price"]))
