@@ -13,32 +13,18 @@ def calculate_profit(filename: str) -> None:
 
     for trade in trades:
         print(trade)
-        if trade["bought"] and trade["sold"]:
-            diff = Decimal.__abs__(
-                Decimal(trade["bought"]) - Decimal(trade["sold"])
-            )
-            if Decimal(trade["sold"]) > Decimal(trade["bought"]):
-                diff *= Decimal("-1")
-                print("Diff", diff)
-
-            profit["earned_money"] += (Decimal(trade["matecoin_price"])
-                                       * diff)
-
-            profit["matecoin_account"] += diff
-            print(profit["earned_money"])
-            print(profit["matecoin_account"])
-        elif not trade["sold"]:
-            profit["earned_money"] += (Decimal(trade["matecoin_price"])
+        if trade["bought"]:
+            profit["earned_money"] -= (Decimal(trade["matecoin_price"])
                                        * Decimal(trade["bought"]))
 
             profit["matecoin_account"] += Decimal(trade["bought"])
-        elif not trade["bought"]:
-            profit["earned_money"] -= (Decimal(trade["matecoin_price"])
+        if trade["sold"]:
+            profit["earned_money"] += (Decimal(trade["matecoin_price"])
                                        * Decimal(trade["sold"]))
 
             profit["matecoin_account"] -= Decimal(trade["sold"])
 
-    profit["earned_money"] = str(-profit["earned_money"])
+    profit["earned_money"] = str(profit["earned_money"])
     profit["matecoin_account"] = str(profit["matecoin_account"])
     print(profit)
 
