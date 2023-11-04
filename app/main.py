@@ -22,5 +22,5 @@ def calculate_profit(trades_file: str) -> None:
     account_data["earned_money"] = str(account_data["earned_money"])
     account_data["matecoin_account"] = str(account_data["matecoin_account"])
 
-    with open("profit.json", "w") as file:
-        json.dump(account_data, file)
+    with open("../profit.json", "w") as file:
+        json.dump(account_data, file, indent=2)
