@@ -1,13 +1,8 @@
 import json
-from pathlib import Path
 from decimal import Decimal
 
 
 def calculate_profit(trades_file: str) -> None:
-    BASE_DIR = Path(__file__).resolve().parent.parent
-    TRADES = BASE_DIR / 'app' / 'trades.json'
-    print(BASE_DIR)
-    print(TRADES)
     account_data = {
         "earned_money": Decimal(0),
         "matecoin_account": Decimal(0),
