@@ -26,6 +26,6 @@ def calculate_profit(file_name: str) -> None:
     }
 
     with (
-        open("C:\\Users\\xXx\\PycharmProjects\\py-matecoin-trades\\"
+        open("C:\\Users\\xXx\\PycharmProjects\\py-matecoin-trades\\app\\"
              "profit.json", "w") as f2):
         json.dump(result, f2, indent=2)
