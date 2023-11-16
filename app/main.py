@@ -1,31 +1,33 @@
-from decimal import Decimal
 import json
+from decimal import Decimal
 
 
-def calculate_profit(file_name: str) -> None:
-    bought, sold = 0, 0
-    b_crypto, s_crypto = 0, 0
+def calculate_profit(filename: str) -> None:
+    with open(filename, "r") as f:
+        trades = json.load(f)
 
-    with open(file_name, "r") as f:
-        transactions = json.load(f)
-        t_len = len(transactions)
-        for i in range(t_len):
-            for value in transactions[i].keys():
-                if transactions[i][value] is None:
-                    transactions[i][value] = 0
-
-            rate = Decimal(transactions[i]["matecoin_price"])
-            b_crypto += Decimal(transactions[i]["bought"])
-            bought += Decimal(transactions[i]["bought"]) * rate
-            s_crypto += Decimal(transactions[i]["sold"])
-            sold += Decimal(transactions[i]["sold"]) * rate
-
-    result = {
-        "earned_money": str(sold - bought),
-        "matecoin_account": str(b_crypto - s_crypto)
+    profit = {
+        "earned_money": Decimal("0.0"),
+        "matecoin_account": Decimal("0.0")
     }
+    for trade in trades:
+        if trade["bought"] is not None:
+            bought = Decimal(trade["bought"])
+            mate_price = Decimal(trade["matecoin_price"])
 
-    with (
-        open("C:\\Users\\xXx\\PycharmProjects\\py-matecoin-trades\\app\\"
-             "profit.json", "w") as f2):
-        json.dump(result, f2, indent=2)
+            profit["earned_money"] -= bought * mate_price
+            profit["matecoin_account"] += bought
+
+        if trade["sold"] is not None:
+            sold = Decimal(trade["sold"])
+            mate_price = Decimal(trade["matecoin_price"])
+
+            profit["earned_money"] += sold * mate_price
+            profit["matecoin_account"] -= sold
+
+    print(profit)
+    profit["earned_money"] = f"{profit['earned_money']}"
+    profit["matecoin_account"] = f"{profit['matecoin_account']}"
+    print(profit)
+    with open("profit.json", "w") as f:
+        json.dump(profit, f, indent=2)
