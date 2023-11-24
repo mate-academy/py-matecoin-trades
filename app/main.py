@@ -8,15 +8,15 @@ def calculate_profit(file_name: str) -> None:
         "matecoin_account": 0
     }
 
-    with open(file_name, "rb") as f:
+    with open(file_name, "r") as f:
         source = json.load(f)
 
     for trade in source:
-        if trade["bought"] is not None:
+        if trade.get("bought"):
             res["matecoin_account"] += Decimal(trade["bought"])
             res["earned_money"] -= (Decimal(trade["bought"])
                                     * Decimal(trade["matecoin_price"]))
-        else:
+        if trade.get("sold"):
             res["matecoin_account"] -= Decimal(trade["sold"])
             res["earned_money"] += (Decimal(trade["sold"])
                                     * Decimal(trade["matecoin_price"]))
