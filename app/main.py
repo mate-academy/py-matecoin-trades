@@ -33,6 +33,3 @@ def calculate_profit(file_name: str) -> None:
 
     with open(os.path.join("../profit.json"), "w") as dump_file:
         json.dump(profit, dump_file, indent=2)
-
-
-calculate_profit("trades.json")
