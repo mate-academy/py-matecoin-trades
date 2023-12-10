@@ -7,7 +7,7 @@ from unittest import mock
 
 import pytest
 
-from app.main import calculate_profit
+from main import calculate_profit
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
