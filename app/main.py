@@ -3,10 +3,8 @@ from decimal import Decimal
 
 
 def calculate_profit(trade_file_path: str) -> None:
-    profit_file_path = (
-        "C:\\Projects_python\\Mate_Projects\\Matecoin_trades/profit.json")
     with open(trade_file_path, "r") as trade_file:
-        with open(profit_file_path, "w") as profit_file:
+        with open("profit.json", "w") as profit_file:
             trade_data = json.load(trade_file)
             net_profit_in_dollars = 0
             total_hold_matecoins = 0
