@@ -24,6 +24,6 @@ def calculate_profit(trade_file: str) -> None:
         "earned_money": str(earned_money),
         "matecoin_account": str(matecoin_account)
     }
-    absolute_path = "C:/projects/py-matecoin-trades/profit.json"
+    absolute_path = "py-matecoin-trades/profit.json"
     with open(absolute_path, "w") as profit_json:
         json.dump(result, profit_json, indent=2)
