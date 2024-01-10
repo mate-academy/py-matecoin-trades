@@ -6,6 +6,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 PROFIT = f"{BASE_DIR}/profit.json"
 
+
 def calculate_profit(trade_file: str) -> None:
     earned_money = Decimal("0")
     matecoin_account = Decimal("0")
