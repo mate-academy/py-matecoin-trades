@@ -1,11 +1,17 @@
 import json
 import decimal
 import os
+from pathlib import Path
 
 
 def calculate_profit(j_file: str = f"{os.getcwd()}\\trades.json") -> None:
     earned_money = decimal.Decimal("0")
     matecoin_account = decimal.Decimal("0")
+
+    BASE_DIR = Path(__file__).resolve().parent.parent
+
+    TRADES = f"{BASE_DIR}/app/trades.json"
+    PROFIT = f"{BASE_DIR}/profit.json"
 
     with open(j_file, "r") as j_file:
         trade_info = json.load(j_file)
@@ -34,8 +40,8 @@ def calculate_profit(j_file: str = f"{os.getcwd()}\\trades.json") -> None:
     result = ({"earned_money": str(earned_money),
                "matecoin_account": str(matecoin_account)})
 
-    print(f"{os.getcwd()}\\profit.json")
-    save_path = "C:\\Users\\hryny\\ma\\py-matecoin-trades\\app\\profit.json"
+    print(PROFIT)
+    save_path = PROFIT
     with open(save_path, "w") as j_file:
         json.dump(result, j_file, indent=2)
 
