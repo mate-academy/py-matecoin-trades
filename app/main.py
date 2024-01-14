@@ -8,10 +8,10 @@ def calculate_profit(j_file: str = f"{os.getcwd()}\\trades.json") -> None:
     earned_money = decimal.Decimal("0")
     matecoin_account = decimal.Decimal("0")
 
-    BASE_DIR = Path(__file__).resolve().parent.parent
+    base_dir = Path(__file__).resolve().parent.parent
 
-    TRADES = f"{BASE_DIR}/app/trades.json"
-    PROFIT = f"{BASE_DIR}/profit.json"
+    # TRADES = f"{base_dir}/app/trades.json"
+    profit = f"{base_dir}/profit.json"
 
     with open(j_file, "r") as j_file:
         trade_info = json.load(j_file)
@@ -40,8 +40,8 @@ def calculate_profit(j_file: str = f"{os.getcwd()}\\trades.json") -> None:
     result = ({"earned_money": str(earned_money),
                "matecoin_account": str(matecoin_account)})
 
-    print(PROFIT)
-    save_path = PROFIT
+    print(profit)
+    save_path = profit
     with open(save_path, "w") as j_file:
         json.dump(result, j_file, indent=2)
 
