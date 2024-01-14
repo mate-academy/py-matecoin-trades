@@ -35,7 +35,7 @@ def calculate_profit(j_file: str = f"{os.getcwd()}\\trades.json") -> None:
                "matecoin_account": str(matecoin_account)})
 
     print(f"{os.getcwd()}\\profit.json")
-    save_path = "C:\\Users\\hryny\\ma\\py-matecoin-trades/profit.json"
+    save_path = "C:\\Users\\hryny\\ma\\py-matecoin-trades\\app\\profit.json"
     with open(save_path, "w") as j_file:
         json.dump(result, j_file, indent=2)
 
