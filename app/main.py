@@ -3,12 +3,12 @@ import decimal
 import os
 
 
-def calculate_profit(file: str = f"{os.getcwd()}\\trades.json") -> None:
+def calculate_profit(j_file: str = f"{os.getcwd()}\\trades.json") -> None:
     earned_money = decimal.Decimal("0")
     matecoin_account = decimal.Decimal("0")
 
-    with open(file, "r") as file:
-        trade_info = json.load(file)
+    with open(j_file, "r") as j_file:
+        trade_info = json.load(j_file)
 
     for deal in trade_info:
 
@@ -34,10 +34,10 @@ def calculate_profit(file: str = f"{os.getcwd()}\\trades.json") -> None:
     result = ({"earned_money": str(earned_money),
                "matecoin_account": str(matecoin_account)})
 
-    print(f"{os.getcwd()}\profit.json")
-    save_path = f"C:\\Users\\hryny\\ma\\py-matecoin-trades/profit.json"
-    with open(save_path, "w") as file:
-        json.dump(result, file, indent=2)
+    print(f"{os.getcwd()}\\profit.json")
+    save_path = "C:\\Users\\hryny\\ma\\py-matecoin-trades/profit.json"
+    with open(save_path, "w") as j_file:
+        json.dump(result, j_file, indent=2)
 
 
 if __name__ == "__main__":
