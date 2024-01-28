@@ -10,7 +10,7 @@ def calculate_profit(filename: str) -> None:
     matecoin_account = decimal.Decimal(0)
 
     for i in data:
-        prise = decimal.Decimal(i["sold"])
+        prise = decimal.Decimal(i["matecoin_price"])
         if i["sold"]:
             amount = decimal.Decimal(i["sold"])
             earned_money += amount * prise
