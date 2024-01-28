@@ -20,7 +20,6 @@ def calculate_profit(filename: str) -> None:
             earned_money -= amount * prise
             matecoin_account += amount
 
-
     profit = {
         "earned_money": str(earned_money),
         "matecoin_account": str(matecoin_account)
