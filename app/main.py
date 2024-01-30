@@ -27,7 +27,3 @@ def calculate_profit(trades: str) -> None:
 
     with open(result_path, "w") as f:
         json.dump(result, f, indent=2)
-
-
-if __name__ == "__main__":
-    calculate_profit("trades.json")
