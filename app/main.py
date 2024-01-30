@@ -9,12 +9,12 @@ def calculate_profit(name_file: str) -> None:
     with open(name_file, "r") as file:
         for transaction in json.load(file):
             price = Decimal(transaction["matecoin_price"])
-            if amount := transaction.get("bought"):
-                matecoin_account += Decimal(amount)
-                earned_money -= Decimal(amount) * price
-            elif amount := transaction.get("sold"):
-                matecoin_account -= Decimal(amount)
-                earned_money += Decimal(amount) * price
+            if volume_of_coins := transaction.get("bought"):
+                matecoin_account += Decimal(volume_of_coins)
+                earned_money -= Decimal(volume_of_coins) * price
+            if volume_of_coins := transaction.get("sold"):
+                matecoin_account -= Decimal(volume_of_coins)
+                earned_money += Decimal(volume_of_coins) * price
 
     date_profit = {
         "earned_money": str(earned_money),
