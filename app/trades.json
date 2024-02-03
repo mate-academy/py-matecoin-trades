@@ -1,42 +1,6 @@
-[
-  {
-    "bought": "0.00085",
-    "sold": null,
-    "matecoin_price": "65980.63"
-  },
-  {
-    "bought": "0.00009",
-    "sold": null,
-    "matecoin_price": "65384.98"
-  },
-  {
-    "bought": "0.00011",
-    "sold": null,
-    "matecoin_price": "48911.23"
-  },
-  {
-    "bought": null,
-    "sold": "0.00058",
-    "matecoin_price": "77830.83"
-  },
-  {
-    "bought": "0.0013",
-    "sold": null,
-    "matecoin_price": "60340.78"
-  },
-  {
-    "bought": null,
-    "sold": "0.0003",
-    "matecoin_price": "93789.11"
-  },
-  {
-    "bought": "0.0007",
-    "sold": null,
-    "matecoin_price": "60340.55"
-  },
-  {
-    "bought": null,
-    "sold": "0.0021",
-    "matecoin_price": "78366.14"
-  }
-]
+ [
+   {"bought": "0.00089", "sold": null, "matecoin_price": "65666.53"},
+   {"bought": "0.00029", "sold": "0.00020", "matecoin_price": "65384.28"},
+   {"bought": "0.00066", "sold": null, "matecoin_price": "12345.83"},
+   {"bought": null, "sold": "0.00070", "matecoin_price": "54321.43"}
+ ]
