@@ -1,10 +1,13 @@
 import json
 import decimal
 
+from pathlib import Path
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 def calculate_profit(filename: str) -> None:
     with (open(filename) as operations_file,
-            open("../profit.json", "w") as result_file):
+            open(f"{BASE_DIR}/profit.json", "w") as result_file):
         operations = json.load(operations_file)
         spent_money, earned_money, mate_coins = 0, 0, 0
         for operation in operations:
