@@ -13,12 +13,20 @@ def calculate_profit(file_json: str) -> None:
 
         for one_day in trade_list:
             if one_day["bought"]:
-                bought_result = Decimal(one_day["bought"]) * Decimal(one_day["matecoin_price"])
+                bought_result = Decimal(
+                    one_day["bought"]
+                ) * Decimal(
+                    one_day["matecoin_price"]
+                )
                 result_data["earned_money"] -= Decimal(bought_result)
                 result_data["matecoin_account"] += Decimal(one_day["bought"])
 
             if one_day["sold"]:
-                sold_result = Decimal(one_day["sold"]) * Decimal(one_day["matecoin_price"])
+                sold_result = Decimal(
+                    one_day["sold"]
+                ) * Decimal(
+                    one_day["matecoin_price"]
+                )
                 result_data["earned_money"] += sold_result
                 result_data["matecoin_account"] -= Decimal(one_day["sold"])
 
