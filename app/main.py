@@ -10,13 +10,13 @@ def calculate_profit(filename: str) -> None:
     account = 0
 
     for trade in trades:
-        if trade['bought']:
-            bought_volume = Decimal(trade['bought'])
+        if trade["bought"]:
+            bought_volume = Decimal(trade["bought"])
             account += bought_volume
             earned -= (bought_volume * Decimal(trade["matecoin_price"]))
 
-        if trade['sold']:
-            sold_volume = Decimal(trade['sold'])
+        if trade["sold"]:
+            sold_volume = Decimal(trade["sold"])
             account -= sold_volume
             earned += (sold_volume * Decimal(trade["matecoin_price"]))
 
@@ -25,5 +25,5 @@ def calculate_profit(filename: str) -> None:
         "matecoin_account": str(account)
     }
 
-    with open('profit.json', 'w') as result_file:
+    with open("profit.json", "w") as result_file:
         json.dump(result, result_file, indent=2)
