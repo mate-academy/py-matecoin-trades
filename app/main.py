@@ -25,4 +25,4 @@ def calculate_profit(trades: str) -> None:
     profit_dict = {"earned_money": str(earned_money),
                    "matecoin_account": str(matecoin_account)}
 
-    json.dump(profit_dict, open("profit.json", "a"))
+    json.dump(profit_dict, open("profit.json", "w"))
