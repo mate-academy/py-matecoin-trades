@@ -4,7 +4,7 @@ from decimal import Decimal
 
 def calculate_profit(file_name: str) -> None:
     with open(file_name, "r") as start_file,\
-            open("../profit.json", "w") as result_file:
+            open("py-matecoin-trades/profit.json", "w") as result_file:
         start_data = json.load(start_file)
         earned_money = Decimal(0)
         matecoin_account = Decimal(0)
