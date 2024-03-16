@@ -28,6 +28,5 @@ def calculate_profit(file_name: str) -> None:
 
             result_dict["matecoin_account"] = str(Decimal(result_dict.get(
                 "matecoin_account")) - Decimal(i.get("sold")))
-
     with open("profit.json", "w") as file:
         json.dump(result_dict, file, indent=2)
