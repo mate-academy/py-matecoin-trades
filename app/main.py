@@ -24,5 +24,5 @@ def calculate_profit(name: str) -> None:
 
     json_format_profit = {key: str(profit[key]) for key in profit}
 
-    with open("../profit.json", "w") as f:
+    with open("profit.json", "w") as f:
         json.dump(json_format_profit, f, indent=2)
