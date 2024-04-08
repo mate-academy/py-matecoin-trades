@@ -1,29 +1,15 @@
-import matplotlib.pyplot as plt
-from typing import Callable
-from random import randint
+import random
 
 
-def flip_coin() -> dict:
-    output = {i: 0 for i in range(11)}
-    repeats = 10 ** 4
+def flip_coin(num_trials: int = 10000, num_flips: int = 10) -> dict:
+    heads_count = {i: 0 for i in range(num_flips + 1)}
 
-    for _ in range(repeats):
-        result = [randint(0, 1) for _ in range(10)].count(1)
-        output[result] = output.get(result, 0) + round(100 / repeats, 2)
+    for _ in range(num_trials):
+        flips = [random.choice(["heads", "tails"]) for _ in range(num_flips)]
+        num_heads = flips.count("heads")
+        heads_count[num_heads] += 1
 
-    return output
+    for heads in heads_count:
+        heads_count[heads] = round((heads_count[heads] / num_trials) * 100, 2)
 
-
-def draw_gaussian_distribution_graph(func: Callable) -> None:
-    x_points = range(0, 11)
-    y_points = func().values()
-
-    plt.plot(x_points, y_points)
-    plt.xticks(x_points)
-    plt.yticks(range(0, 101, 10))
-
-    plt.title("Gaussian distribution")
-    plt.xlabel("Heads count")
-    plt.ylabel("Drop percentage %")
-
-    plt.show()
+    return heads_count
