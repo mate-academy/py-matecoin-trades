@@ -1,31 +1,29 @@
-import json
-from decimal import Decimal
+import matplotlib.pyplot as plt
+from typing import Callable
+from random import randint
 
 
-def calculate_profit(trades: str) -> None:
-    with open(trades, "r") as f:
-        fail_trades = json.load(f)
+def flip_coin() -> dict:
+    output = {i: 0 for i in range(11)}
+    repeats = 10 ** 4
 
-    earned_money = Decimal("0")
-    matecoin_account = Decimal("0")
+    for _ in range(repeats):
+        result = [randint(0, 1) for _ in range(10)].count(1)
+        output[result] = output.get(result, 0) + round(100 / repeats, 2)
 
-    for i in fail_trades:
-        bought_coin = Decimal(i.get("bought") or 0)
-        sold_coin = Decimal(i.get("sold") or 0)
-        matecoin_price = Decimal(i.get("matecoin_price") or 0)
+    return output
 
-        if bought_coin > 0:
-            earned_money -= bought_coin * matecoin_price
-            matecoin_account += bought_coin
 
-        if sold_coin > 0:
-            earned_money += sold_coin * matecoin_price
-            matecoin_account -= sold_coin
+def draw_gaussian_distribution_graph(func: Callable) -> None:
+    x_points = range(0, 11)
+    y_points = func().values()
 
-        result = {
-            "earned_money": str(earned_money),
-            "matecoin_account": str(matecoin_account)
-        }
+    plt.plot(x_points, y_points)
+    plt.xticks(x_points)
+    plt.yticks(range(0, 101, 10))
 
-        with open("profit.json", "w") as output_file:
-            json.dump(result, output_file, indent=2)
+    plt.title("Gaussian distribution")
+    plt.xlabel("Heads count")
+    plt.ylabel("Drop percentage %")
+
+    plt.show()
