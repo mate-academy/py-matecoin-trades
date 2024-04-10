@@ -23,5 +23,5 @@ def calculate_profit(file_name: str) -> None:
             result["matecoin_account"] += (amount_bought - amount_sold)
 
     with open("profit.json", "w") as file:
-        json.dump({k: str(v) for k, v in sorted(result.items())}, file, indent=2)
-
+        json.dump({k: str(v)
+                   for k, v in sorted(result.items())}, file, indent=2)
