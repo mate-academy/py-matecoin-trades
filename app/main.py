@@ -27,5 +27,5 @@ def calculate_profit(name: str) -> None:
                 "matecoin_account": str(coin)
             },
             profit_file,
-            indent=3
+            indent=2
         )
