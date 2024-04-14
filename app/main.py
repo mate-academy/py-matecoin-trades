@@ -23,4 +23,3 @@ def calculate_profit(file_name: str) -> None:
     result_dict["matecoin_account"] = str(matecoin_account)
     with open("profit.json", "w") as a:
         json.dump(result_dict, a, indent=2)
-    return None
