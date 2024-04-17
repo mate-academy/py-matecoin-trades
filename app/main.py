@@ -2,26 +2,29 @@ import json
 from decimal import Decimal
 
 
-def calculate_profit(file_name: str) -> None:
-    result = {
-        "earned_money": Decimal("0"),
-        "matecoin_account": Decimal("0")
-    }
-
-    with open(file_name, "r") as file:
+def calculate_profit(trades_information_file: str) -> None:
+    with open(trades_information_file, "r") as file:
         trades = json.load(file)
 
-        for transaction in trades:
-            amount_bought = (Decimal(transaction["bought"])
-                             if transaction["bought"] else Decimal("0"))
-            amount_sold = (Decimal(transaction["sold"])
-                           if transaction["sold"] else Decimal("0"))
-            price = Decimal(transaction["matecoin_price"])
+    earned_money = Decimal("0")
+    matecoin_account = Decimal("0")
 
-            result["earned_money"] += ((amount_sold * price)
-                                       - (amount_bought * price))
-            result["matecoin_account"] += (amount_bought - amount_sold)
+    for trade in trades:
+        bought = Decimal(trade["bought"]) if (trade.get("bought")
+                                              is not None) else Decimal("0")
+        sold = Decimal(trade["sold"]) if (trade.get("sold")
+                                          is not None) else Decimal("0")
+        matecoin_price = Decimal(trade["matecoin_price"])
 
-    with open("profit.json", "w") as file:
-        json.dump({k: str(v)
-                   for k, v in sorted(result.items())}, file, indent=2)
+        earned_money += sold * matecoin_price
+        earned_money -= bought * matecoin_price
+        matecoin_account += bought
+        matecoin_account -= sold
+
+    profit_data = {
+        "earned_money": str(earned_money),
+        "matecoin_account": str(matecoin_account)
+    }
+
+    with open("profit.json", "w") as outfile:
+        json.dump(profit_data, outfile, indent=2)
