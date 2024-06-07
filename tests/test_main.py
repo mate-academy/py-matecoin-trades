@@ -30,7 +30,7 @@ class CleanUpFile:
 def test_function_should_return_none():
     with CleanUpFile(PROFIT):
         assert (
-                calculate_profit() is None
+                calculate_profit(TRADES) is None
         ), "Function 'calculate_profit' should return None"
 
 
@@ -68,7 +68,7 @@ def test_default_create_profit_file():
     expected = '{\n  "earned_money": "49.8176904",\n  "matecoin_account": "0.00007"\n}'
 
     with CleanUpFile(PROFIT):
-        calculate_profit()
+        calculate_profit(TRADES)
 
         with open(PROFIT) as actual:
             assert actual.read() == expected
@@ -109,6 +109,6 @@ def test_optional_create_profit_file(mock_json_load, trades, profit, monkeypatch
         mock_json_load.return_value = trades
         monkeypatch.setattr("app.main.json.dump", mocked_dump)
 
-        calculate_profit()
+        calculate_profit(TRADES)
 
         assert dump_content == profit
