@@ -1,5 +1,5 @@
-import json
 from decimal import Decimal
+import json
 
 
 def calculate_profit(file_name: str) -> None:
