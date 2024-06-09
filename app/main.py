@@ -11,13 +11,13 @@ def calculate_profit(file_name: str) -> None:
         "matecoin_account": decimal.Decimal("0"),
     }
     for trade in trades:
-        price = decimal.Decimal(f"{trade["matecoin_price"]}")
+        price = decimal.Decimal(f'{trade["matecoin_price"]}')
         if trade["bought"] is not None:
-            buy = decimal.Decimal(f"{trade["bought"]}")
+            buy = decimal.Decimal(f'{trade["bought"]}')
             trader_account["earned_money"] -= buy * price
             trader_account["matecoin_account"] += buy
         if trade["sold"] is not None:
-            sell = decimal.Decimal(f"{trade["sold"]}")
+            sell = decimal.Decimal(f'{trade["sold"]}')
             trader_account["earned_money"] += sell * price
             trader_account["matecoin_account"] -= sell
 
