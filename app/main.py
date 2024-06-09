@@ -1,6 +1,5 @@
 from decimal import Decimal
 import json
-import os
 
 
 def calculate_profit(trades: str) -> None:
@@ -11,7 +10,7 @@ def calculate_profit(trades: str) -> None:
         trades_data = json.load(f)
 
     for data in trades_data:
-        matecoin_price = Decimal(data['matecoin_price'])
+        matecoin_price = Decimal(data["matecoin_price"])
         if data["bought"] is not None:
             bought_volume = Decimal(data["bought"])
             total_spent += bought_volume * matecoin_price
