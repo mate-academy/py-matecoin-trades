@@ -30,4 +30,3 @@ def calculate_profit(name: str) -> None:
     out["matecoin_account"] = str(sum_bought - sum_sold)
     with open("profit.json", "wt") as f:
         json.dump(out, f, indent=2)
-
