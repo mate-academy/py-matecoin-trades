@@ -10,14 +10,14 @@ def calculate_profit(filename: str) -> None:
         for trades in trades_data:
             if trades["bought"]:
                 profit_dict["earned_money"] -= \
-                    (Decimal(trades["bought"]) *
-                     Decimal(trades["matecoin_price"]))
+                    (Decimal(trades["bought"]) *Decimal\
+                        (trades["matecoin_price"]))
                 profit_dict["matecoin_account"] += \
                     Decimal(trades["bought"])
             if trades["sold"]:
                 profit_dict["earned_money"] += \
-                    (Decimal(trades["sold"]) *
-                     Decimal(trades["matecoin_price"]))
+                    (Decimal(trades["sold"]) * Decimal\
+                        (trades["matecoin_price"]))
                 profit_dict["matecoin_account"] -= Decimal(trades["sold"])
         for key, value in profit_dict.items():
             profit_dict[key] = str(value)
