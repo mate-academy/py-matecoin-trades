@@ -1,6 +1,10 @@
-import os
 import json
 import decimal
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+TRADES = f"{BASE_DIR}/app/trades.json"
+PROFIT = f"{BASE_DIR}/profit.json"
 
 
 def prepare_decimal_dict_for_dump(dict_to_dump: dict) -> dict:
@@ -52,15 +56,7 @@ def float_to_decimal(value: str) -> decimal:
     return decimal.Decimal(value)
 
 
-# def read_js_file(file_name: str) -> str:
-#     with open(file_name, "r") as file:
-#         mentors = json.load(file)
-#         return mentors
-
-
 def calculate_profit(file_name: str) -> None:
-    dir_path = os.path.dirname(os.path.realpath(__file__))
-    print(dir_path)
     profit = {
         "earned_money": decimal.Decimal(0),
         "matecoin_account": decimal.Decimal(0)
@@ -72,5 +68,4 @@ def calculate_profit(file_name: str) -> None:
     js_str_as_decimal = prepare_js_file_after_read(js_file_as_list)
     create_transactions(js_str_as_decimal, profit)
     js_decimal_as_str = prepare_decimal_dict_for_dump(profit)
-    write_js_file(file_name, js_decimal_as_str)
-    return None
+    write_js_file(PROFIT, js_decimal_as_str)
