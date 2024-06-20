@@ -73,3 +73,4 @@ def calculate_profit(file_name: str) -> None:
     create_transactions(js_str_as_decimal, profit)
     js_decimal_as_str = prepare_decimal_dict_for_dump(profit)
     write_js_file(file_name, js_decimal_as_str)
+    return None
