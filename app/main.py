@@ -22,7 +22,7 @@ def calculate_profit(name_file: str) -> None:
                 sold_metacoin = Decimal("0")
             sold_all += sold_metacoin
             matecoin_account_balance += bougth_metacoin
-            matecoin_price = Decimal(f"{list_trades[i]["matecoin_price"]}")
+            matecoin_price = Decimal(list_trades[i]["matecoin_price"])
             sold_metacoin_price += sold_metacoin * matecoin_price
             dolars_bougth += bougth_metacoin * matecoin_price
         balance = matecoin_account_balance - sold_all
