@@ -10,11 +10,13 @@ def calculate_profit(name_of_file: str) -> None:
     coins_owned = decimal.Decimal("0")
     for trade in trades:
         if trade["bought"] is not None:
-            price = decimal.Decimal(str(trade["bought"])) * decimal.Decimal(str(trade["matecoin_price"]))
+            price = (decimal.Decimal(str(trade["bought"]))
+                     * decimal.Decimal(str(trade["matecoin_price"])))
             coins_owned += decimal.Decimal(str(trade["bought"]))
             earned_money -= price
         if trade["sold"] is not None:
-            price = decimal.Decimal(str(trade["sold"])) * decimal.Decimal(str(trade["matecoin_price"]))
+            price = (decimal.Decimal(str(trade["sold"]))
+                     * decimal.Decimal(str(trade["matecoin_price"])))
             coins_owned -= decimal.Decimal(str(trade["sold"]))
             earned_money += price
 
