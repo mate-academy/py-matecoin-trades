@@ -21,7 +21,7 @@ def calculate_profit(file_name: str) -> None:
             matecoin_account -= Decimal(user["sold"])
 
     profit = {
-        "earned money": str(sum_of_sold - sum_of_bought),
+        "earned_money": str(sum_of_sold - sum_of_bought),
         "matecoin_account": str(matecoin_account)
     }
 
