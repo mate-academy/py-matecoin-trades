@@ -12,10 +12,12 @@ def calculate_profit(file_name: str) -> None:
 
     for user in users_data:
         if user["bought"]:
-            sum_of_bought += Decimal(user["bought"]) * Decimal(user["matecoin_price"])
+            sum_of_bought += (Decimal(user["bought"])
+                              * Decimal(user["matecoin_price"]))
             matecoin_account += Decimal(user["bought"])
         if user["sold"]:
-            sum_of_sold += Decimal(user["sold"]) * Decimal(user["matecoin_price"])
+            sum_of_sold += (Decimal(user["sold"])
+                            * Decimal(user["matecoin_price"]))
             matecoin_account -= Decimal(user["sold"])
 
     profit = {
