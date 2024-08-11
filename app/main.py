@@ -10,14 +10,14 @@ def calculate_profit(file_name: str) -> None:
         operations = json.load(trades_file)
 
     for trade in operations:
-        if "bought" in trade and trade["bought"]:
-            earned_money -= (Decimal(str(trade["bought"]))
-                             * Decimal(str(trade["matecoin_price"])))
-            matecoin_account += Decimal(str(trade["bought"]))
-        if "sold" in trade and trade["sold"]:
-            earned_money -= (Decimal(str(trade["sold"]))
-                             * Decimal(str(trade["matecoin_price"])))
-            matecoin_account += Decimal(str(trade["sold"]))
+        if trade["bought"]:
+            earned_money -= (Decimal(trade["bought"])
+                             * Decimal(trade["matecoin_price"]))
+            matecoin_account += Decimal(trade["bought"])
+        if trade["sold"]:
+            earned_money += (Decimal(trade["sold"])
+                             * Decimal(trade["matecoin_price"]))
+            matecoin_account -= Decimal(trade["sold"])
 
     profit_dict = {"earned_money": str(earned_money),
                    "matecoin_account": str(matecoin_account)}
