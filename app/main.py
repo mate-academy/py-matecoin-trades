@@ -1,6 +1,5 @@
 import json
 from decimal import Decimal
-import os
 
 
 def calculate_profit(trades: str) -> None:
@@ -27,9 +26,6 @@ def calculate_profit(trades: str) -> None:
         "earned_money": str(earned),
         "matecoin_account": str(account)
     }
-    output_path = os.path.join(
-        "/Users/lera/PycharmProjects/py-matecoin-trades/",
-        "profit.json"
-    )
-    with open(output_path, "w") as final_file:
+
+    with open("profit.json", "w") as final_file:
         json.dump(result, final_file, indent=2)
