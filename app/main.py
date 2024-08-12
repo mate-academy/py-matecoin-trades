@@ -1,10 +1,12 @@
 import json
+import os
 from decimal import Decimal
 
 
 def calculate_profit(trades_info: str) -> None:
-    with open(trades_info, "r") as f:
-        trades = json.load(f)
+    filepath = os.path.join(os.path.dirname(__file__), trades_info)
+    with open(filepath, "r") as file:
+        trades = json.load(file)
 
     earned_money = Decimal(0)
     matecoin_account = Decimal(0)
