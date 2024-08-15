@@ -1,9 +1,12 @@
 import json
+import os.path
 from decimal import Decimal
 
 
 def calculate_profit(trades_file: str) -> None:
-    with open(trades_file) as source_file:
+    full_path_name = os.path.join(os.path.dirname(__file__), trades_file)
+
+    with open(full_path_name) as source_file:
         data_trades = json.load(source_file)
 
     earned_money = Decimal("0")
@@ -31,8 +34,14 @@ def calculate_profit(trades_file: str) -> None:
         "earned_money": str(earned_money),
         "matecoin_account": str(matecoin_account)
     }
-    with open("profit.json", "w") as json_file:
-        json.dump(profit_data, json_file, indent=4)
+
+    base_dir = os.path.join(os.path.dirname(__file__), "..")
+    full_path_result_file = (
+        os.path.join(os.path.abspath(base_dir), "profit.json")
+    )
+
+    with open(full_path_result_file, "w") as json_file2:
+        json.dump(profit_data, json_file2, indent=4)
 
 
 calculate_profit("trades.json")
