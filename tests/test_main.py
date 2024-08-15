@@ -65,7 +65,7 @@ def test_which_functions_should_be_used():
 
 
 def test_default_create_profit_file():
-    expected = '{\n  "earned_money": "49.8176904",\n  "matecoin_account": "0.00007"\n}'
+    expected = '{\n    "earned_money": "49.8176904",\n    "matecoin_account": "0.00007"\n}'
 
     with CleanUpFile(PROFIT):
         calculate_profit(TRADES)
