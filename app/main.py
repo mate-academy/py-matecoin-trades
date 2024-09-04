@@ -4,7 +4,7 @@ from decimal import Decimal
 
 def calculate_profit(trades: str) -> None:
     with (open(trades, "r") as trade,
-          open("../profit.json", "w") as profit):
+          open("./profit.json", "w") as profit):
         coins_list = json.load(trade)
         profit_dict = {
             "earned_money": 0,
