@@ -4,8 +4,7 @@ from decimal import Decimal
 
 def calculate_profit(trades: str) -> None:
     with (open(trades, "r") as trade,
-          open("/home/nastya/Mate_academy/python_core/"
-               "py-matecoin-trades/profit.json", "w") as profit):
+          open("py-matecoin-trades/profit.json", "w") as profit):
         coins_list = json.load(trade)
         profit_dict = {
             "earned_money": 0,
