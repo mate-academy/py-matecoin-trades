@@ -11,18 +11,11 @@ def calculate_profit(file_name: str) -> None:
     with open(file_path, "r") as f:
         trades = json.load(f)
     for act in trades:
-        if act["sold"] and act["bought"]:
+        if act["bought"] is not None:
             profit["earned_money"] -= Decimal(
                 act["bought"]) * Decimal(act["matecoin_price"])
             profit["matecoin_account"] += Decimal(act["bought"])
-            profit["earned_money"] += Decimal(
-                act["sold"]) * Decimal(act["matecoin_price"])
-            profit["matecoin_account"] -= Decimal(act["sold"])
-        if act["bought"] and not act["sold"]:
-            profit["earned_money"] -= Decimal(
-                act["bought"]) * Decimal(act["matecoin_price"])
-            profit["matecoin_account"] += Decimal(act["bought"])
-        if act["sold"] and not act["bought"]:
+        if act["sold"] is not None:
             profit["earned_money"] += Decimal(
                 act["sold"]) * Decimal(act["matecoin_price"])
             profit["matecoin_account"] -= Decimal(act["sold"])
