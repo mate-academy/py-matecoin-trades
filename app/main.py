@@ -14,27 +14,30 @@ def calculate_profit(file_name: str) -> None:
     with open(file_path, "r") as f:
         trades = json.load(f)
 
-    earned_money = Decimal(0)
-    matecoin_account = Decimal(0)
+    total_bought = Decimal(0)
+    total_sold = Decimal(0)
 
     for trade in trades:
         if trade["bought"] is not None:
-            bought_volume = Decimal(trade["bought"])
-            matecoin_account += bought_volume
-            earned_money -= bought_volume * Decimal(trade["matecoin_price"])
+            total_bought += (Decimal(trade["bought"])
+                             * Decimal(trade["matecoin_price"]))
         if trade["sold"] is not None:
-            sold_volume = Decimal(trade["sold"])
-            matecoin_account -= sold_volume
-            earned_money += sold_volume * Decimal(trade["matecoin_price"])
+            total_sold += (Decimal(trade["sold"])
+                           * Decimal(trade["matecoin_price"]))
+
+    earned_money = total_sold - total_bought
+    matecoin_account = sum(Decimal(trade["bought"] or 0)
+                           - Decimal(trade["sold"] or 0) for trade in trades)
 
     profit_info = {
         "earned_money": str(earned_money),
         "matecoin_account": str(matecoin_account)
     }
 
-    profit_file_path = os.path.join(current_dir, "profit.json")
+    project_dir = os.path.dirname(os.path.dirname(current_dir))
+    profit_file_path = os.path.join(project_dir, "profit.json")
 
-    with open(profit_file_path, "w") as f:
+    with open(profit_file_path, "w", encoding="utf-8") as f:
         json.dump(profit_info, f, indent=4)
 
 
