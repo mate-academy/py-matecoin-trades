@@ -65,13 +65,16 @@ def test_which_functions_should_be_used():
 
 
 def test_default_create_profit_file():
-    expected = '{\n  "earned_money": "49.8176904",\n  "matecoin_account": "0.00007"\n}'
+    expected = '{\n    "earned_money": "49.8176904",\n    "matecoin_account": "0.00007"\n}'
 
     with CleanUpFile(PROFIT):
         calculate_profit(TRADES)
 
-        with open(PROFIT) as actual:
-            assert actual.read() == expected
+    project_dir = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+    profit_file_path = os.path.join(project_dir, "profit.json")
+
+    with open(profit_file_path) as actual:
+        assert actual.read() == expected
 
 
 @pytest.mark.parametrize(
