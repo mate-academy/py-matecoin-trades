@@ -1,4 +1,5 @@
 import json
+
 from decimal import Decimal
 
 
@@ -21,6 +22,6 @@ def calculate_profit(file_name: json) -> None:
         "earned_money": str(metacoin_account),
         "matecoin_account": str(bought - sold),
     }
-    with open("../profit.json", "w") as file:
+    with open("profit.json", "w") as file:
         json.dump(profit, file, indent=2)
     return None
