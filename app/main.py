@@ -31,4 +31,4 @@ def calculate_profit(trades_file: str) -> Union[None, dict]:
     }
 
     with open("profit.json", "w") as file:
-        json.dump(result, file, indent=4)
+        json.dump(result, file, indent=2)
