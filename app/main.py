@@ -18,9 +18,10 @@ def calculate_profit(file_name: str) -> None:
                     * Decimal(operation["matecoin_price"])
                 matecoin_account -= Decimal(operation["sold"])
 
-    with open("profit.json", "w") as outer_file:
+    with open("../profit.json", "w") as outer_file:
         result = {
             "earned_money": str(earned_money),
             "matecoin_account": str(matecoin_account)
         }
-        json.dump(result, outer_file, indent=3)
+        json.dump(result, outer_file, indent=2)
+
