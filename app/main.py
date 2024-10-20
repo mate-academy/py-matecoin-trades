@@ -9,16 +9,16 @@ def calculate_profit(name_file: json) -> None:
         count_date = json.load(trades_file)
         for transaction in count_date:
             if transaction["bought"] is not None:
-                amount_matecoin += Decimal(f"{transaction["bought"]}")
+                amount_matecoin += Decimal(transaction["bought"])
                 profit -= (
-                    Decimal(f"{transaction["bought"]}")
-                    * Decimal(f"{transaction["matecoin_price"]}")
+                    Decimal(transaction["bought"])
+                    * Decimal(transaction["matecoin_price"])
                 )
             if transaction["sold"] is not None:
-                amount_matecoin -= Decimal(f"{transaction["sold"]}")
+                amount_matecoin -= Decimal(transaction["sold"])
                 profit += (
-                    Decimal(f"{transaction["sold"]}")
-                    * Decimal(f"{transaction["matecoin_price"]}")
+                    Decimal(transaction["sold"])
+                    * Decimal(transaction["matecoin_price"])
                 )
 
     profit_dict = {
