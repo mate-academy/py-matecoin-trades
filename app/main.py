@@ -13,12 +13,20 @@ def calculate_profit(file_name: str) -> None:
 
     for data_dict in data:
         if bought := data_dict.get("bought"):
-            result["matecoin_account"] = Decimal(result.get("matecoin_account")) + Decimal(bought)
-            total_spent += Decimal(bought) * Decimal(data_dict.get("matecoin_price"))
+            result["matecoin_account"] = (
+                Decimal(result.get("matecoin_account")) + Decimal(bought)
+            )
+            total_spent += (
+                Decimal(bought) * Decimal(data_dict.get("matecoin_price"))
+            )
 
         if sold := data_dict.get("sold"):
-            result["matecoin_account"] = Decimal(result.get("matecoin_account")) - Decimal(sold)
-            total_earned += Decimal(sold) * Decimal(data_dict.get("matecoin_price"))
+            result["matecoin_account"] = (
+                Decimal(result.get("matecoin_account")) - Decimal(sold)
+            )
+            total_earned += (
+                Decimal(sold) * Decimal(data_dict.get("matecoin_price"))
+            )
 
         result["earned_money"] = total_earned - total_spent
 
