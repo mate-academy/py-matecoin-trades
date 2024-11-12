@@ -31,6 +31,6 @@ def calculate_profit(file_name: str) -> None:
             "matecoin_account": str(current_coins)
             }
 
-    parent_dir_path = os.path.join("..", "profit.json")
+    parent_dir_path = os.path.join("", "profit.json")
     with open(parent_dir_path, "w") as file:
         json.dump(data, file, indent=2)
