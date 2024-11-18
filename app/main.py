@@ -9,10 +9,10 @@ def calculate_profit(trades_file: str) -> None:
     matecoin_account = Decimal("0")
     for trade in trades:
         matecoin_price = Decimal(trade["matecoin_price"])
-        if trade["bought"]:
+        if "bought" in trade and trade["bought"]:
             matecoin_account += Decimal(trade["bought"])
             earned_money -= Decimal(trade["bought"]) * matecoin_price
-        elif trade["sold"]:
+        if "sold" in trade and trade["sold"]:
             matecoin_account -= Decimal(trade["sold"])
             earned_money += Decimal(trade["sold"]) * matecoin_price
     profit_data = {"earned_money": str(earned_money),
