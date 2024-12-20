@@ -24,8 +24,9 @@ def calculate_profit(trades_file: str) -> None:
             bought_count += Decimal(trade["bought"])
 
     result_dict = {
-            "earned_money": str(sold_count_all_in_dollars - bought_count_all_in_dollars),
-            "matecoin_account": str(sold_count - bought_count),
+        "earned_money": str(sold_count_all_in_dollars
+                            - bought_count_all_in_dollars),
+        "matecoin_account": str(sold_count - bought_count),
     }
 
     with open("profit.json", "w") as file:
