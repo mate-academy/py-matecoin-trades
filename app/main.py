@@ -6,7 +6,7 @@ def calculate_profit(trades_file_path: str) -> None:
     with open(trades_file_path, "rb") as input_file:
         trade_dicts = json.load(input_file)
 
-    earned_money, matecoin_account  = Decimal(0), Decimal(0)
+    earned_money, matecoin_account = Decimal(0), Decimal(0)
 
     for trade_dict in trade_dicts:
         bought, sold, coin_price = trade_dict.values()
