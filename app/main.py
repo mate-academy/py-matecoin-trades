@@ -6,7 +6,7 @@ def calculate_profit(trades_file: str) -> None:
     earned_money = Decimal(0)
     matecoin_account = Decimal(0)
 
-    with open("app/trades.json", "r") as file:
+    with open("trades.json", "r") as file:
         trades = json.load(file)
 
     for trade in trades:
@@ -26,7 +26,7 @@ def calculate_profit(trades_file: str) -> None:
     }
 
     with open("profit.json", "w") as output_file:
-        json.dump(result, output_file, indent=4)
+        json.dump(result, output_file, indent=2)
 #
 
 
