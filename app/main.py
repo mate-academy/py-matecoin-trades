@@ -10,10 +10,16 @@ def calculate_profit(file_name: str) -> None:
 
         for transaction in data_coin:
             if transaction["bought"] is not None:
-                earned_money -= Decimal(str(transaction["bought"])) * Decimal(str(transaction["matecoin_price"]))
+                earned_money -= (
+                        Decimal(str(transaction["bought"])) *
+                        Decimal(str(transaction["matecoin_price"]))
+                )
                 matecoin_account += Decimal(str(transaction["bought"]))
             if transaction["sold"] is not None:
-                earned_money += Decimal(str(transaction["sold"])) * Decimal(str(transaction["matecoin_price"]))
+                earned_money += (
+                        Decimal(str(transaction["sold"])) * 
+                        Decimal(str(transaction["matecoin_price"]))
+                )
                 matecoin_account -= Decimal(str(transaction["sold"]))
 
         profit_to_js = {
