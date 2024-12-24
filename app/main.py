@@ -27,6 +27,7 @@ def calculate_profit(trades_file: str) -> None:
 
     with open("profit.json", "w") as output_file:
         json.dump(result, output_file)
+#
 
 
 calculate_profit("trades.json")
