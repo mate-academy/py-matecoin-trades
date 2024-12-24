@@ -6,7 +6,7 @@ def calculate_profit(trades_file: str) -> None:
     earned_money = Decimal(0)
     matecoin_account = Decimal(0)
 
-    with open(trades_file, "r") as file:
+    with open("trades.json", "r") as file:
         trades = json.load(file)
 
     for trade in trades:
