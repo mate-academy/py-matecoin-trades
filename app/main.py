@@ -24,6 +24,6 @@ def calculate_profit(trades: str) -> None:
         "earned_money": str(earned),
         "matecoin_account": str(matecoins)
     }
-
-    with open(f"{Path(__file__).resolve().parent.parent}/profit.json", "w") as profit_file:
+    path = f"{Path(__file__).resolve().parent.parent}/profit.json"
+    with open(path, "w") as profit_file:
         json.dump(profit, profit_file, indent=2)
