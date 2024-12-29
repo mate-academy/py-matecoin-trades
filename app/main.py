@@ -1,5 +1,6 @@
 import json
 from decimal import Decimal
+from pathlib import Path
 
 
 def calculate_profit(trades: str) -> None:
@@ -24,5 +25,5 @@ def calculate_profit(trades: str) -> None:
         "matecoin_account": str(matecoins)
     }
 
-    with open("../profit.json", "w") as profit_file:
+    with open(f"{Path(__file__).resolve().parent.parent}/profit.json", "w") as profit_file:
         json.dump(profit, profit_file, indent=2)
