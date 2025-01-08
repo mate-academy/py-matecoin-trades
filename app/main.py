@@ -1,25 +1,26 @@
 import json
 from decimal import Decimal
 
-trades = {}
-profit = {"earned_money": "0",
-          "matecoin_account": "0",
-          }
-with open("trades.json", "r") as file:
-    trades = json.load(file)
-for trade in trades:
-    if trade["bought"]:
-        profit["matecoin_account"] = str(Decimal(profit["matecoin_account"])
-                                         - Decimal(trade["bought"]))
-        profit["earned_money"] = str(Decimal(profit["earned_money"])
-                                     - Decimal(trade["bought"])
-                                     * Decimal(trade["matecoin_price"]))
-    else:
-        profit["matecoin_account"] = str(Decimal(profit["matecoin_account"])
-                                         - Decimal(trade["sold"]))
-        profit["earned_money"] = str(Decimal(profit["earned_money"])
-                                     + Decimal(trade["sold"])
-                                     * Decimal(trade["matecoin_price"]))
 
-with open("profit.json", "w") as f:
-    json.dump(profit, f, indent=2)
+def calculate_profit(trades_file_path: str) -> None:
+    with open(trades_file_path) as f:
+        data = json.load(f)
+
+    earned_money = Decimal("0")
+    coin_balance = Decimal("0")
+
+    for trade in data:
+        if trade["bought"]:
+            earned_money -= (Decimal(trade["bought"])
+                             * Decimal(trade["matecoin_price"]))
+            coin_balance += Decimal(trade["bought"])
+        if trade["sold"]:
+            earned_money += (Decimal(trade["sold"])
+                             * Decimal(trade["matecoin_price"]))
+            coin_balance -= Decimal(trade["sold"])
+
+    with open("profit.json", "w") as f:
+        json.dump({
+            "earned_money": str(earned_money),
+            "matecoin_account": str(coin_balance)
+        }, f, indent=2)
