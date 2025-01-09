@@ -23,9 +23,7 @@ def calculate_profit(file_name: str) -> None:
         "earned_money": str(decimal_profit),
         "matecoin_account": str(matecoin_account)
     }
-    current_dir = os.getcwd()
-    parent_dir = os.path.dirname(current_dir)
-    result_path = parent_dir + "/profit.json"
+    result_path = os.path.join(os.getcwd(), "profit.json")
 
     os.makedirs(os.path.dirname(result_path), exist_ok=True)
 
