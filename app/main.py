@@ -32,7 +32,8 @@ def calculate_profit(file_name: str) -> None:
     }
 
     with open(
-            "C:\\Users\\tdgih\\PycharmProjects\\py-matecoin-trades\\profit.json",
+            "C:\\Users\\tdgih\\PycharmProjects\\"
+            "py-matecoin-trades\\profit.json",
             "w"
     ) as outfile:
         json.dump(result, outfile, indent=2)
