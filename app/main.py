@@ -4,6 +4,7 @@ from decimal import Decimal
 
 
 def calculate_profit(file_name: str) -> None:
+
     with open(os.path.join(os.getcwd(), file_name), "r") as file:
 
         trades = json.load(file)
@@ -31,9 +32,8 @@ def calculate_profit(file_name: str) -> None:
         "matecoin_account": str(matecoin_account)
     }
 
-    with open(
-            "C:\\Users\\tdgih\\PycharmProjects\\"
-            "py-matecoin-trades\\profit.json",
-            "w"
-    ) as outfile:
+    output_path = os.path.abspath(os.path.join(os.getcwd(), os.pardir, "profit.json"))
+
+
+    with open(output_path, "w") as outfile:
         json.dump(result, outfile, indent=2)
