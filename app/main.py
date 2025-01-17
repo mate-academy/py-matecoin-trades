@@ -2,6 +2,7 @@ import os
 import json
 from decimal import Decimal
 
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 def calculate_profit(file_name: str) -> None:
 
