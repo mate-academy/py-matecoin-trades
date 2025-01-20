@@ -12,7 +12,7 @@ from app.main import calculate_profit
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 TRADES = f"{BASE_DIR}/app/trades.json"
-PROFIT = f"{BASE_DIR}/profit.json"
+PROFIT = f"{BASE_DIR}/app/profit.json"
 
 
 class CleanUpFile:
