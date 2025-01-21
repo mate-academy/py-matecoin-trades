@@ -29,7 +29,6 @@ def calculate_profit(file_name: str) -> None:
         json.dump(result, file, indent=2)
 
 
-#если указать путь к файлу 'trades.json' или 'app/trades.json' - получаем ошибку 'Error: File trades.json not found'
 calculate_profit(
     "c:/Users/Admin/github-projects/py-matecoin-trades/app/trades.json"
 )
