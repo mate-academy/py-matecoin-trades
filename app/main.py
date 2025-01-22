@@ -6,20 +6,21 @@ from decimal import Decimal
 def calculate_profit(file_path: str) -> None:
     with open(file_path, "r") as file:
         transactions = json.load(file)
+    matecoin_account = Decimal("0")
     by = Decimal("0")
     sold = Decimal("0")
     for transact in transactions:
         price = Decimal(transact["matecoin_price"])
         if transact["bought"]:
             by += Decimal(transact["bought"]) * price
-        else:
+            matecoin_account += Decimal(transact["bought"])
+        if transact["sold"]:
             sold += Decimal(transact["sold"]) * price
+            matecoin_account -= Decimal(transact["sold"])
     profit = sold - by
-    account = "0.00007"
     report = {
         "earned_money": str(profit),
-        "matecoin_account": account
+        "matecoin_account": str(matecoin_account.copy_abs())
     }
-    json_object = json.dumps(report, indent=2)
     with open("profit.json", "w") as file:
-        file.write(json_object)
+        json.dump(report, file, indent=2)
