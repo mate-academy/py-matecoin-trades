@@ -30,6 +30,6 @@ def calculate_profit(trades_file: Any) -> None:
         }
 
         with open("profit.json", "w") as profit_file:
-            json.dump(profit_data, profit_file, indent=3)
+            json.dump(profit_data, profit_file, indent=2)
     except Exception as e:
         print(f"Error: {e}")
