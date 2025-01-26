@@ -1,35 +1,34 @@
 import json
-from decimal import Decimal, ROUND_HALF_UP
+from decimal import Decimal
 
 
-def calculate_profit(file_name: str) -> None:
-    with open(file_name, "r") as trade_file:
-        trades = json.load(trade_file)
+def calculate_profit(data: str) -> None:
+    with open(data, "r") as json_file:
+        date = json.load(json_file)
 
-    earned_money = Decimal(0)
+    total_earned_money = Decimal(0)
     matecoin_account = Decimal(0)
+    total_spent = Decimal(0)
 
-    for trade in trades:
+    for transaction in date:
+        bought = transaction["bought"]
+        sold = transaction["sold"]
+        matecoin_price = Decimal(transaction["matecoin_price"])
 
-        if trade.get("bought"):
-            matecoin_account += Decimal(trade["bought"])
+        if bought:
+            matecoin_account += Decimal(bought)
+            total_spent += Decimal(bought) * matecoin_price
 
-        if trade.get("sold"):
-            earned_money += \
-                (
-                    Decimal(trade["sold"]) * Decimal(trade["matecoin_price"])
-                )
+        if sold:
+            matecoin_account -= Decimal(sold)
+            earned_money = Decimal(sold) * matecoin_price
+            total_earned_money += earned_money
 
-    earned_money = (
-        earned_money.quantize(Decimal("0.00000001"), rounding=ROUND_HALF_UP))
-    matecoin_account = (
-        matecoin_account.quantize(
-            Decimal("0.00000001"), rounding=ROUND_HALF_UP))
-
+    # Результат
     result = {
-        "earned_money": f"{earned_money: .8f}",
-        "matecoin_account": f"{matecoin_account: .8f}"
+        "earned_money": str(total_earned_money - total_spent),
+        "matecoin_account": str(matecoin_account),
     }
 
-    with open("profit.json", "w") as profit_file:
-        json.dump(result, profit_file, indent=4)
+    with open("profit.json", "w") as result_file:
+        json.dump(result, result_file, indent=2)
