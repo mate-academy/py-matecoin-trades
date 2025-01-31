@@ -2,8 +2,8 @@ import json
 import decimal
 
 
-def calculate_profit(trades: json) -> None:
-    with open(trades) as d:
+def calculate_profit(filename: str) -> None:
+    with open(filename) as d:
         trades_data = json.load(d)
 
     earned_money = 0
