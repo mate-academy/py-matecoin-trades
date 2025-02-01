@@ -29,5 +29,6 @@ def calculate_profit(date_trades: list) -> dict:
     result["matecoin_account"] = str(total_coins)
     return result
 
+
 with open("profit.json", "w") as file_profit:
     json.dump(calculate_profit(open_file), file_profit, indent=2)
