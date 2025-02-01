@@ -14,18 +14,23 @@ def calculate_profit(date_trades: list) -> dict:
     for item in date_trades:
         if item["bought"] is not None:
             total_coins += Decimal(item["bought"])
-            purchase_costs += Decimal(item["bought"]) * Decimal(item["matecoin_price"])
-
+            purchase_costs += (
+                Decimal(item["bought"]) * Decimal(item["matecoin_price"])
+            )
+            
         if item["sold"] is not None:
-            revenue_from_sales += Decimal(item["sold"]) * Decimal(item["matecoin_price"])
-            revenue_from_sales += Decimal(item["sold"])
+            revenue_from_sales += (
+                    Decimal(item["sold"]) * Decimal(item["matecoin_price"])
+            )
             total_coins -= Decimal(item["sold"])
-            profit = Decimal(revenue_from_sales) - Decimal(purchase_costs)
 
+
+    profit = Decimal(revenue_from_sales) - Decimal(purchase_costs)
     result["earned_money"] = str(profit)
     result["matecoin_account"] = str(total_coins)
+
     return result
 
 
-with open("profit.json", "a") as file_profit:
+with open("profit.json", "w") as file_profit:
     json.dump(calculate_profit(open_file), file_profit, indent=2)
