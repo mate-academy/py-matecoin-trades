@@ -1,33 +1,31 @@
 import json
-import os
-import locale
-from decimal import Decimal
+import decimal
 
 
-def calculate_profit(trades_filename: str) -> None:
-    locale.setlocale(locale.LC_NUMERIC, "C")
-
-    with open(trades_filename, "r") as file:
-        trades = json.load(file)
-
-    matecoin_account = Decimal("0")
-    earned_money = Decimal("0")
-
+def calculate_profit(file_name: str) -> None:
+    with open(file_name) as file_trades:
+        trades = json.load(file_trades)
+    sold_money = 0
+    bought_money = 0
+    sold = 0
+    bought = 0
     for trade in trades:
-        bought = Decimal(trade["bought"]) if trade["bought"] else Decimal("0")
-        sold = Decimal(trade["sold"]) if trade["sold"] else Decimal("0")
-        price = Decimal(trade["matecoin_price"])
+        if trade["sold"] is not None:
+            sold_money += (decimal.Decimal(trade["matecoin_price"])
+                           * decimal.Decimal(trade["sold"]))
+            sold += decimal.Decimal(trade["sold"])
+        if trade["bought"] is not None:
+            bought_money += (decimal.Decimal(trade["matecoin_price"])
+                             * decimal.Decimal(trade["bought"]))
+            bought += decimal.Decimal(trade["bought"])
 
-        matecoin_account += bought
-        matecoin_account -= sold
-        earned_money += sold * price
-        earned_money -= bought * price
+    earned_money = decimal.Decimal(sold_money) - decimal.Decimal(bought_money)
+    matecoin_account = decimal.Decimal(bought) - decimal.Decimal(sold)
 
-    result = {
-        "earned_money": f"{earned_money:.10f}".rstrip("0").rstrip("."),
-        "matecoin_account": f"{matecoin_account:.10f}".rstrip("0").rstrip(".")
+    profit = {
+        "earned_money": str(earned_money),
+        "matecoin_account": str(matecoin_account)
     }
 
-    output_path = os.path.join(os.getcwd(), "profit.json")
-    with open(output_path, "w") as file:
-        json.dump(result, file, indent=4)
+    with open("profit.json", "w") as file_profit:
+        json.dump(profit, file_profit, indent=2)
