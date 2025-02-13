@@ -24,8 +24,8 @@ def calculate_profit(trades_filename: str) -> None:
         earned_money -= bought * price
 
     result = {
-        "earned_money": f"{earned_money:f}",
-        "matecoin_account": f"{matecoin_account:f}"
+        "earned_money": f"{earned_money:.10f}".rstrip("0").rstrip("."),
+        "matecoin_account": f"{matecoin_account:.10f}".rstrip("0").rstrip(".")
     }
 
     output_path = os.path.join(os.getcwd(), "profit.json")
