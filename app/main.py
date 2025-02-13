@@ -1,8 +1,12 @@
 import json
+import os
+import locale
 from decimal import Decimal
 
 
 def calculate_profit(trades_filename: str) -> None:
+    locale.setlocale(locale.LC_NUMERIC, "C")
+
     with open(trades_filename, "r") as file:
         trades = json.load(file)
 
@@ -20,9 +24,10 @@ def calculate_profit(trades_filename: str) -> None:
         earned_money -= bought * price
 
     result = {
-        "earned_money": format(earned_money, "f"),
-        "matecoin_account": format(matecoin_account, "f")
+        "earned_money": f"{earned_money:f}",
+        "matecoin_account": f"{matecoin_account:f}"
     }
 
-    with open("profit.json", "w") as file:
+    output_path = os.path.join(os.path.dirname(trades_filename), "profit.json")
+    with open(output_path, "w") as file:
         json.dump(result, file, indent=4)
