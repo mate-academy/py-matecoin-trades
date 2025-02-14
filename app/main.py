@@ -4,7 +4,6 @@ from decimal import Decimal
 
 def calculate_profit(file_name: str) -> None:
     with open(file_name) as js_data:
-        result = {}
         data: list[dict] = json.load(js_data)
 
         earned_money = Decimal()
@@ -19,12 +18,9 @@ def calculate_profit(file_name: str) -> None:
             earned_money += different
             matecoin_account += bought - sold
 
-            result["earned_money"] = str(earned_money)
-            result["matecoin_account"] = str(matecoin_account)
-
-    with open("../profit.json", "w") as json_file:
-        json.dump(result, json_file, indent=2)
-
-
-if __name__ == "__main__":
-    calculate_profit("trades.json")
+    with open("profit.json", "w") as file_profit:
+        result = {
+            "earned_money": str(earned_money),
+            "matecoin_account": str(matecoin_account),
+        }
+        json.dump(result, file_profit, indent=2)
