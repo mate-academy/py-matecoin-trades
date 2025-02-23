@@ -2,85 +2,41 @@ from __future__ import annotations
 
 import json
 from decimal import Decimal
+from typing import TypedDict
 
 
-class Trade:
-    def __init__(
-            self,
-            matecoin_price: Decimal,
-            bought: Decimal | None = None,
-            sold: Decimal = None
-    ) -> None:
-        self.matecoint_price = matecoin_price
-        self.bought = bought
-        self.sold = sold
-
-    @classmethod
-    def from_dict(cls, trade_dict: dict[str, str | None]) -> Trade:
-        return cls(
-            matecoin_price=Decimal(trade_dict["matecoin_price"]),
-            bought=trade_dict["bought"] and Decimal(trade_dict["bought"]),
-            sold=trade_dict["sold"] and Decimal(trade_dict["sold"])
-        )
-
-    @classmethod
-    def from_list(
-            cls,
-            trades_list: list[dict[str, str | None]]
-    ) -> list[Trade]:
-        return [cls.from_dict(trade_dict) for trade_dict in trades_list]
-
-
-class MatecoinAccount:
-    def __init__(
-            self,
-            balance: Decimal = Decimal("0"),
-            profit: Decimal = Decimal("0")
-    ) -> None:
-        self.balance = balance
-        self.profit = profit
-
-    def bought(self, trade: Trade) -> None:
-        self.balance += trade.bought
-        self.profit -= trade.bought * trade.matecoint_price
-
-    def sold(self, trade: Trade) -> None:
-        self.balance -= trade.sold
-        self.profit += trade.sold * trade.matecoint_price
-
-    @staticmethod
-    def to_json(matecoin_account: MatecoinAccount) -> dict[str, str]:
-        return {
-            "earned_money": str(matecoin_account.profit),
-            "matecoin_account": str(matecoin_account.balance)
-        }
-
-
-def read_trades_file(file_name: str) -> dict[str, str | None]:
-    with open(file_name) as f:
-        return json.load(f)
+class Trade(TypedDict):
+    bought: str | None
+    sold: str | None
+    matecoin_price: str | None
 
 
 def calculate_profit(file_name: str) -> None:
-    trades_list = read_trades_file(file_name)
+    trades: list[Trade]
 
-    trades = Trade.from_list(trades_list)
-    matecoin_account = MatecoinAccount()
+    with open(file_name) as f:
+        trades = json.load(f)
+
+    matecoin_account = Decimal("0")
+    earned_money = Decimal("0")
 
     for trade in trades:
-        if trade.bought:
-            matecoin_account.bought(trade)
+        if bought := trade["bought"]:
+            bought = Decimal(bought)
+            matecoin_account += bought
+            earned_money -= bought * Decimal(trade["matecoin_price"])
 
-        if trade.sold:
-            matecoin_account.sold(trade)
+        if sold := trade["sold"]:
+            sold = Decimal(sold)
+            matecoin_account -= sold
+            earned_money += sold * Decimal(trade["matecoin_price"])
 
     with open("profit.json", "w") as profit_file:
         json.dump(
-            MatecoinAccount.to_json(matecoin_account),
+            {
+                "earned_money": str(earned_money),
+                "matecoin_account": str(matecoin_account)
+            },
             profit_file,
             indent=2,
         )
-
-
-if __name__ == "__main__":
-    calculate_profit("trades.json")
