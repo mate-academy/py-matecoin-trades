@@ -2,7 +2,7 @@ import decimal
 import json
 
 
-def calculate_profit(file_name="trades.json") -> None:
+def calculate_profit(file_name: str = "trades.json") -> None:
     bought = decimal.Decimal(0)
     sold = decimal.Decimal(0)
 
