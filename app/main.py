@@ -30,7 +30,9 @@ def calculate_profit(trades_file: str) -> None:
         "earned_money": str(earned_money),
         "matecoin_account": str(matecoin_account),
     }
-    base_dir: str = os.path.dirname(os.path.dirname(os.path.abspath(trades_file)))
+    abs_path: str = os.path.abspath(trades_file)
+    parent_dir: str = os.path.dirname(abs_path)
+    base_dir: str = os.path.dirname(parent_dir)
     profit_file: str = os.path.join(base_dir, "profit.json")
     with open(profit_file, "w", encoding="utf-8") as output_file:
         json.dump(profit_data, output_file, ensure_ascii=False, indent=2)
