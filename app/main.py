@@ -20,7 +20,7 @@ def calculate_profit(filename: str) -> None:
                 matecoins_money += (Decimal(trade["sold"])
                                     * Decimal(trade["matecoin_price"]))
         except (TypeError, ValueError) as e:
-            print(f'Wrong type {trade} - Error {e}')
+            print(f"Wrong type {trade} - Error {e}")
 
     wallet = {
         "earned_money": str(matecoins_money),
