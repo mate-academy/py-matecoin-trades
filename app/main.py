@@ -24,16 +24,21 @@ def calculate_profit(trade_file_name: str) -> None:
         )
         matecoin_price = Decimal(dict_elem.get("matecoin_price"))
 
-        profit_dict["earned_money"] += (matecoin_price * sold_amount) - (
-            matecoin_price * bought_amount
+        profit_dict["earned_money"] += (
+            (matecoin_price * sold_amount)
+            - (matecoin_price * bought_amount)
         )
         profit_dict["matecoin_account"] += bought_amount - sold_amount
 
-    with open("profit.json", "w") as profit_f:
+    with open(
+            "D:\\Programming\\PythonCore\\py-matecoin-trades/profit.json",
+            "w"
+    ) as profit_f:
         json.dump(
             {
                 "earned_money": str(profit_dict["earned_money"]),
                 "matecoin_account": str(profit_dict["matecoin_account"]),
             },
             profit_f,
+            indent=2
         )
