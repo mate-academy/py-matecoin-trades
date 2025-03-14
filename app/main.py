@@ -30,10 +30,7 @@ def calculate_profit(trade_file_name: str) -> None:
         )
         profit_dict["matecoin_account"] += bought_amount - sold_amount
 
-    with open(
-            "D:\\Programming\\PythonCore\\py-matecoin-trades/profit.json",
-            "w"
-    ) as profit_f:
+    with open("profit.json", "w") as profit_f:
         json.dump(
             {
                 "earned_money": str(profit_dict["earned_money"]),
