@@ -28,6 +28,5 @@ def calculate_profit(file_name: json) -> None:
         "matecoin_account": str(matecoin_balance)
     }
 
-    output_path = "C:/Users/OEM/py-matecoin-trades/profit.json"
-    with open(output_path, "w") as file_json:
+    with open("profit.json", "w") as file_json:
         json.dump(result, file_json, indent=2)
