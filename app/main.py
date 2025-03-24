@@ -20,5 +20,5 @@ def calculate_profit(file_name: str) -> None:
 
     profit_str = {k: str(v) for k, v in profit.items()}
 
-    with open("D:\\Mate\\py-matecoin-trades\\profit.json", "w") as f:
+    with open("profit.json", "w") as f:
         json.dump(profit_str, f, indent=2)
