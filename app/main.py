@@ -1,49 +1,37 @@
-import logging
 import os
 import json
 from decimal import Decimal
 
-logging.basicConfig(level=logging.DEBUG)
 
-PROFIT = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                      "profit.json")
+def calculate_profit(file_path: str) -> None:
+    profit_file = '/Users/dimon/projects/py-matecoin-trades/profit.json'
 
+    os.makedirs(os.path.dirname(profit_file), exist_ok=True)
 
-def calculate_profit(trades_file):
-    # Ensure the directory exists where the profit.json file should be saved
-    os.makedirs(os.path.dirname(PROFIT), exist_ok=True)
+    with open(file_path, "r") as file:
+        info = json.load(file)
 
-    logging.debug(f"Saving profit to {PROFIT}")
+    spent_money = Decimal("0.0")
+    earned_money = Decimal("0.0")
+    matecoin_account = Decimal("0.0")
 
-    total_bought = Decimal(0)
-    total_sold = Decimal(0)
-    matecoin_account = Decimal(0)
+    for trade in info:
+        bought = Decimal(trade.get("bought", "0") or "0")
+        sold = Decimal(trade.get("sold", "0") or "0")
+        price = Decimal(trade.get("matecoin_price", "0") or "0")
 
-    with open(trades_file, 'r') as file:
-        trades = json.load(file)
+        if bought > 0:
+            spent_money += bought * price
+            matecoin_account += bought
 
-    for trade in trades:
-        bought = trade.get("bought")
-        sold = trade.get("sold")
-        matecoin_price = Decimal(trade.get("matecoin_price"))
-
-        if bought is not None:
-            total_bought += Decimal(bought) * matecoin_price
-            matecoin_account += Decimal(bought)
-
-        if sold is not None:
-            total_sold += Decimal(sold) * matecoin_price
-            matecoin_account -= Decimal(sold)
-
-    earned_money = total_sold - total_bought
+        if sold > 0:
+            earned_money += sold * price
+            matecoin_account -= sold
 
     profit_data = {
-        "earned_money": str(earned_money),
-        "matecoin_account": str(matecoin_account)
+        "earned_money": str(earned_money - spent_money),
+        "matecoin_account": str(matecoin_account),
     }
 
-    # Write the result to profit.json
-    logging.debug(f"Writing data to {PROFIT}: {profit_data}")
-
-    with open(PROFIT, 'w') as file:
+    with open(profit_file, "w") as file:
         json.dump(profit_data, file, indent=2)
