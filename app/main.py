@@ -13,7 +13,7 @@ def calculate_profit(file_path: str) -> None:
 
     spent_money = Decimal("0.0")
     earned_money = Decimal("0.0")
-    matecoin_account = Decimal("0.0")
+    matecoin_account = Decimal("0.0"
 
     for trade in info:
         bought = Decimal(trade.get("bought", "0") or "0")
