@@ -26,6 +26,6 @@ def calculate_profit(file_path: str) -> None:
             profit_dict["matecoin_account"] = str(account)
 
             with open("profit.json", "w") as profit:
-                json.dump(profit_dict, profit, indent=4)
+                json.dump(profit_dict, profit, indent=2)
     except Exception as e:
         print("Error:", e)
