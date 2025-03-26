@@ -4,7 +4,7 @@ from decimal import Decimal
 
 
 def calculate_profit(file_path: str) -> None:
-    profit_file = '/Users/dimon/projects/py-matecoin-trades/profit.json'
+    profit_file = "/Users/dimon/projects/py-matecoin-trades/profit.json"
 
     os.makedirs(os.path.dirname(profit_file), exist_ok=True)
 
