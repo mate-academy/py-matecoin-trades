@@ -1,37 +1,39 @@
-import os
+# write your code here
 import json
+
 from decimal import Decimal
 
 
-def calculate_profit(file_path: str) -> None:
-    profit_file = "/Users/dimon/projects/py-matecoin-trades/profit.json"
+def calculate_profit(filename: json) -> None:
+    with open(filename, "r") as file:
+        trades = json.load(file)
 
-    os.makedirs(os.path.dirname(profit_file), exist_ok=True)
+    earned_money = Decimal("0")
+    matecoin_account = Decimal("0")
 
-    with open(file_path, "r") as file:
-        info = json.load(file)
+    for trade in trades:
+        if trade["bought"]:
+            bought = Decimal(trade["bought"])
+        else:
+            bought = Decimal("0")
+        if trade["sold"]:
+            sold = Decimal(trade["sold"])
+        else:
+            sold = Decimal("0")
 
-    spent_money = Decimal("0.0")
-    earned_money = Decimal("0.0")
-    matecoin_account = Decimal("0.0")
+        price = Decimal(trade["matecoin_price"])
 
-    for trade in info:
-        bought = Decimal(trade.get("bought", "0") or "0")
-        sold = Decimal(trade.get("sold", "0") or "0")
-        price = Decimal(trade.get("matecoin_price", "0") or "0")
+        matecoin_account += bought - sold
+        earned_money += sold * price - bought * price
 
-        if bought > 0:
-            spent_money += bought * price
-            matecoin_account += bought
-
-        if sold > 0:
-            earned_money += sold * price
-            matecoin_account -= sold
-
-    profit_data = {
-        "earned_money": str(earned_money - spent_money),
+    result = {
+        "earned_money": str(earned_money),
         "matecoin_account": str(matecoin_account),
     }
 
-    with open(profit_file, "w") as file:
-        json.dump(profit_data, file, indent=2)
+    with open("profit.json", "w") as output_file:
+        json.dump(result, output_file, indent=2)
+
+
+if __name__ == "__main__":
+    calculate_profit("trades.json")
