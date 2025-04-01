@@ -10,6 +10,7 @@ def calculate_profit(file_name: str) -> None:
         "earned_money": "0.0",
         "matecoin_account": "0.0"
     }
+
     for i in trades:
         if i["bought"] is not None:
             profit_info["earned_money"] = (
