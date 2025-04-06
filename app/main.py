@@ -33,7 +33,7 @@ def calculate_profit(json_file: str, output_file: str = "profit.json") -> None:
         "matecoin_account": str(matecoin_account)
     }
 
-    output_file = os.path.abspath(output_file)
+    output_path = os.path.abspath(output_file)
 
-    with open(output_file, 'w') as f:
+    with open(output_path, 'w') as f:
         json.dump(result, f, indent=2)
