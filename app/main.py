@@ -21,15 +21,13 @@ def calculate_profit(file_name: str) -> None:
         total_sold += sold_js
         total_bought += bought_js
 
-    profit = str(total_sold - total_bought_amount)
+    profit = str(total_sold_amount - total_bought_amount)
     account = str(total_bought - total_sold)
 
-    with open("profit.json", "w") as op:
+    with open("profit.json", "w") as out:
         json.dump(
             {
                 "earned_money": profit,
                 "matecoin_account": account
-            },
-            op,
-            indent=2
+            }, out, indent=2
         )
