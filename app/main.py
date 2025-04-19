@@ -19,7 +19,8 @@ def calculate_profit(file_name: str) -> None:
             if trade["sold"] is not None:
                 matecoin_account_result -= Decimal(trade["sold"])
                 earned_money_result += (
-                + Decimal(trade["sold"]) * Decimal(trade["matecoin_price"])
+                    Decimal(trade["sold"])
+                    * Decimal(trade["matecoin_price"])
                 )
 
                 profit_dict.update(
@@ -32,7 +33,8 @@ def calculate_profit(file_name: str) -> None:
             if trade["bought"] is not None:
                 matecoin_account_result += Decimal(trade["bought"])
                 earned_money_result += (
-                - Decimal(trade["bought"]) * Decimal(trade["matecoin_price"])
+                    - Decimal(trade["bought"])
+                    * Decimal(trade["matecoin_price"])
                 )
                 profit_dict.update(
                     {
