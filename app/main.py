@@ -3,7 +3,7 @@ import json
 
 
 def calculate_profit(filename: str) -> None:
-    with open(filename) as json_data, open("../profit.json", "w") as json_save:
+    with open(filename) as json_data, open("./profit.json", "w") as json_save:
         data = json.load(json_data)
 
         profit = Decimal(0)
