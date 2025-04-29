@@ -1,6 +1,7 @@
 import json
 from decimal import Decimal
 
+
 def calculate_profit(filename: str) -> None:
     with open(filename, "r") as file:
         trades = json.load(file)
