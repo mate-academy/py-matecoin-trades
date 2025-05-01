@@ -15,6 +15,8 @@ def calculate_profit(file_name: str) -> None:
 
     earned_money = sum(
         trade["sold"] * trade["matecoin_price"] for trade in trade_info
+    ) - sum(
+        trade["bought"] * trade["matecoin_price"] for trade in trade_info
     )
     matecoin_account = (
         sum(trade["bought"] for trade in trade_info)
