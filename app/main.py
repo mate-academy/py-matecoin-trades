@@ -9,7 +9,7 @@ def calculate_profit(file_name: str) -> None:
     for item in trade_info:
         for key, value in item.items():
             if value is None:
-                item[key] = 0
+                item[key] = decimal.Decimal(0)
             else:
                 item[key] = decimal.Decimal(value)
 
@@ -22,8 +22,8 @@ def calculate_profit(file_name: str) -> None:
     )
 
     profit_dict = {
-        "earned_money": float(earned_money),
-        "matecoin_account": float(matecoin_account)
+        "earned_money": str(earned_money),
+        "matecoin_account": str(matecoin_account)
     }
 
     with open("profit.json", "w") as file:
