@@ -21,8 +21,8 @@ def calculate_profit(file_name: str) -> None:
             matecoin_account -= sold
 
     result = {
-        "earned_money": f"{earned_money: .7f}",
-        "matecoin_account": f"{matecoin_account: .5f}"
+        "earned_money": f"{earned_money:.7f}",
+        "matecoin_account": f"{matecoin_account:.5f}"
     }
 
     with open("profit.json", "w") as f:
