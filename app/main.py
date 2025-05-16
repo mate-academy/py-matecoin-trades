@@ -25,8 +25,9 @@ def calculate_profit(file_name: str) -> None:
         "matecoin_account": str(matecoin_account)
     }
 
-    output_path = os.path.join(
-        "C:\\Users\\Admin\\py-matecoin-trades", "profit.json"
-    )
+    output_dir = "C:\\Users\\Admin\\py-matecoin-trades"
+    os.makedirs(output_dir, exist_ok=True)
+
+    output_path = os.path.join(output_dir, "profit.json")
     with open(output_path, "w", encoding="utf-8") as file:
         json.dump(result, file, indent=2)
