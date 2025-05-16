@@ -25,7 +25,7 @@ def calculate_profit(file_name: str) -> None:
         "matecoin_account": str(matecoin_account)
     }
 
-    output_dir = "py-matecoin-trades"
+    output_dir = "py-matecoin-trades/tests"
     os.makedirs(output_dir, exist_ok=True)
 
     output_path = os.path.join(output_dir, "profit.json")
