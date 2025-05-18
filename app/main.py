@@ -24,7 +24,12 @@ def calculate_profit(file_name: str) -> None:
         "matecoin_account": str(matecoin_account)
     }
 
-    with open("/Users/vladislav/PythonProject8/py-matecoin-trades/profit.json", "w") as file:
+    with (open(
+            "/Users/vladislav/PythonProject8/"
+            "py-matecoin-trades/profit.json", "w") as file):
         json.dump(result, file, indent=2)
 
-calculate_profit("/Users/vladislav/PythonProject8/py-matecoin-trades/trades.json")
+
+calculate_profit(
+    "/Users/vladislav/PythonProject8/py-matecoin-trades/trades.json"
+)
