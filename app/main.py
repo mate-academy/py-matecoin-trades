@@ -26,5 +26,5 @@ def calculate_profit(filename: str) -> None:
         "matecoin_account": str(matecoin_account)
     }
 
-    with open("../profit.json", "w") as outfile:
+    with open("profit.json", "w") as outfile:
         json.dump(result, outfile, indent=2)
