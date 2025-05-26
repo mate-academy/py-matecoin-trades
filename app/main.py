@@ -11,22 +11,15 @@ def calculate_profit(file_name: str = "trades.json") -> None:
     account_sold = []
 
     for i in data:
-        if i["bought"] is None:
-            continue
-        else:
-            price_bought = (Decimal(i["bought"])
-                            * Decimal(i["matecoin_price"]))
-            data_bought.append(price_bought)
-            account_bought.append(float(i["bought"]))
-
-    for i in data:
-        if i["sold"] is None:
-            continue
-        else:
-            price_sold = (Decimal(i["sold"])
-                          * Decimal(i["matecoin_price"]))
-            data_sold.append(price_sold)
-            account_sold.append(float(i["sold"]))
+        price = Decimal(i["matecoin_price"])
+        if i["bought"]:
+            bought = Decimal(i["bought"])
+            data_bought.append(bought * price)
+            account_bought.append(bought)
+        if i["sold"]:
+            sold = Decimal(i["sold"])
+            data_sold.append(sold * price)
+            account_sold.append(sold)
 
     matecoin_account = (sum(account_bought) - sum(account_sold))
     earned_money = (sum(data_bought) - sum(data_sold))
