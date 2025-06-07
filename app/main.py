@@ -2,9 +2,10 @@ from decimal import Decimal
 import json
 import os
 
+
 def calculate_profit(file_name: str) -> None:
     try:
-        with open(file_name, 'r') as f:
+        with open(file_name, "r") as f:
             data = json.load(f)
     except FileNotFoundError:
         print(f"File: {file_name} not found")
@@ -28,6 +29,7 @@ def calculate_profit(file_name: str) -> None:
         "earned_money": str(earned_money),
         "matecoin_account": str(matecoin_account)
     }
-    profit_file = os.path.join(os.path.dirname(os.path.abspath(file_name)), "profit.json")
+    profit_file = os.path.join(os.path.dirname
+                               (os.path.abspath(file_name)), "profit.json")
     with open(profit_file, "w") as f:
         json.dump(finish_result, f, indent=2)
