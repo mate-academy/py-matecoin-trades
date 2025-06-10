@@ -2,29 +2,55 @@ import json
 from decimal import Decimal
 
 
-def calculate_profit(filename: str) -> None:
-    with open(filename, "r") as file:
-        trades = json.load(file)
+def calculate_profit(trades_file: str) -> None:
+    try:
+        with open(trades_file, "r") as f:
+            trades = json.load(f)
+    except FileNotFoundError:
+        print(f"Error: File '{trades_file}' not found.")
+        return
+    except json.JSONDecodeError:
+        print(f"Error: Invalid JSON format in '{trades_file}'.")
+        return
 
-    total_earned_money = Decimal("0.0")
-    matecoin_account = Decimal("0.0")
+    matecoin_account = Decimal("0")
+    earned_money = Decimal("0")
 
     for trade in trades:
-        if trade["bought"] is not None:
-            bought_amount = Decimal(trade["bought"])
-            matecoin_price = Decimal(trade["matecoin_price"])
+        bought = trade.get("bought")
+        sold = trade.get("sold")
+        matecoin_price = trade.get("matecoin_price")
+
+        if bought is not None:
+            bought_amount = Decimal(str(bought))
+            price = Decimal(str(matecoin_price))
+            earned_money -= bought_amount * price
             matecoin_account += bought_amount
-            total_earned_money -= bought_amount * matecoin_price
-        elif trade["sold"] is not None:
-            sold_amount = Decimal(trade["sold"])
-            matecoin_price = Decimal(trade["matecoin_price"])
+        elif sold is not None:
+            sold_amount = Decimal(str(sold))
+            price = Decimal(str(matecoin_price))
+            earned_money += sold_amount * price
             matecoin_account -= sold_amount
-            total_earned_money += sold_amount * matecoin_price
 
     profit_data = {
-        "earned_money": str(total_earned_money),
+        "earned_money": str(earned_money),
         "matecoin_account": str(matecoin_account)
     }
 
-    with open("profit.json", "w") as file:
-        json.dump(profit_data, file)
+    try:
+        with open("profit.json", "w") as f:
+            json.dump(profit_data, f, indent=2)
+    except IOError as e:
+        print(f"Error writing to 'profit.json': {e}")
+        return
+
+
+dummy_trades = [
+    {"bought": "0.00111", "sold": None, "matecoin_price": "48911.23"},
+    {"bought": None, "sold": "0.00058", "matecoin_price": "77830.83"}
+]
+
+with open("trades.json", "w") as f:
+    json.dump(dummy_trades, f, indent=2)
+
+calculate_profit("trades.json")
