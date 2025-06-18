@@ -4,7 +4,7 @@ from decimal import Decimal, ROUND_DOWN
 
 def calculate_profit(file_name: str) -> None:
     with (open(file_name, "r") as original_file,
-          open("../profit.json", "w") as new_file):
+          open("profit.json", "w") as new_file):
         content = json.load(original_file)
 
         crypto_bought_in_usd = sum(Decimal(element["bought"])
