@@ -1,33 +1,34 @@
 import json
-import os
 from decimal import Decimal
 
 
-def calculate_profit(trades_info: str) -> None:
-    with open(trades_info, "r") as file:
-        trades = json.load(file)
+def calculate_profit(file_name: str) -> None:
+    with open(file_name, "r") as file_r:
+        trades = json.load(file_r)
 
-    matecoin_account = spent_money = earned_money = Decimal("0.0")
+    earned_money = Decimal("0")
+    matecoin_account = Decimal("0")
 
     for trade in trades:
-        matecoin_price = Decimal(trade["matecoin_price"])
-
-        if trade["bought"] is not None:
-            matecoins_bought = Decimal(trade["bought"])
-            spent_money += matecoins_bought * matecoin_price
-            matecoin_account += matecoins_bought
-
-        if trade["sold"] is not None:
-            matecoins_sold = Decimal(trade["sold"])
-            earned_money += matecoins_sold * matecoin_price
-            matecoin_account -= matecoins_sold
+        if trade["bought"] and trade["sold"]:
+            earned_money += ((Decimal(trade["sold"])
+                              - Decimal(trade["bought"]))
+                             * Decimal(trade["matecoin_price"]))
+            matecoin_account += (Decimal(trade["bought"])
+                                 - Decimal(trade["sold"]))
+        elif trade["bought"]:
+            earned_money -= (Decimal(trade["bought"])
+                             * Decimal(trade["matecoin_price"]))
+            matecoin_account += Decimal(trade["bought"])
+        else:
+            earned_money += (Decimal(trade["sold"])
+                             * Decimal(trade["matecoin_price"]))
+            matecoin_account -= Decimal(trade["sold"])
 
     profit = {
-        "earned_money": str(Decimal(earned_money) - Decimal(spent_money)),
-        "matecoin_account": str(matecoin_account)
+        "earned_money": str(earned_money),
+        "matecoin_account": str(matecoin_account),
     }
 
-    profit_file_path = os.path.join(os.getcwd(), "profit.json")
-
-    with open(profit_file_path, "w") as file:
-        json.dump(profit, file, indent=2)
+    with open("profit.json", "w") as file_w:
+        json.dump(profit, file_w, indent=2)
