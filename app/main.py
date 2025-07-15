@@ -24,7 +24,7 @@ def calculate_profit(filename: str) -> None:
                 sale += sold_amount * price
                 coin_count -= sold_amount
 
-    with open("../profit.json", "w") as json_profit:
+    with open("profit.json", "w") as json_profit:
         profit = sale - purchase
         json_result = {
             "earned_money": str(profit),
