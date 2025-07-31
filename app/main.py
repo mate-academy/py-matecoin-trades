@@ -13,7 +13,7 @@ def calculate_profit(name: str) -> None:
                 earned_money -= Decimal(
                     f"{tread["bought"]}") * Decimal(f"{tread["matecoin_price"]}"
                 )
-            elif tread["sold"] is not None:
+            if tread["sold"] is not None:
                 matecoin_account -= Decimal(f"{tread["sold"]}")
                 earned_money += (
                         Decimal(f"{tread["sold"]}") * Decimal(f"{tread["matecoin_price"]}")
