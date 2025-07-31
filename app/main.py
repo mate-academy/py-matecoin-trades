@@ -9,16 +9,16 @@ def calculate_profit(name: str) -> None:
         trades = json.load(f)
         for tread in trades:
             if tread["bought"] is not None:
-                matecoin_account += Decimal(f"{tread["bought"]}")
+                matecoin_account += Decimal(f"{tread['bought']}")
                 earned_money -= (
-                    Decimal(f"{tread["bought"]}")
-                    * Decimal(f"{tread["matecoin_price"]}")
+                    Decimal(f"{tread['bought']}")
+                    * Decimal(f"{tread['matecoin_price']}")
                 )
             if tread["sold"] is not None:
-                matecoin_account -= Decimal(f"{tread["sold"]}")
+                matecoin_account -= Decimal(f"{tread['sold']}")
                 earned_money += (
-                    Decimal(f"{tread["sold"]}")
-                    * Decimal(f"{tread["matecoin_price"]}")
+                    Decimal(f"{tread['sold']}")
+                    * Decimal(f"{tread['matecoin_price']}")
                 )
 
     result_dict = {
