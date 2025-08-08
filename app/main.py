@@ -10,10 +10,12 @@ def calculate_profit(filename: str) -> None:
         "matecoin_account": Decimal("0.0")
     }
     for item in data:
-        difference = Decimal(item["sold"] or "0.0") - Decimal(item["bought"] or "0.0")
+        sold = Decimal(item["sold"] or "0.0")
+        bought = Decimal(item["bought"] or "0.0")
+        difference = sold - bought
         profit["earned_money"] += difference * Decimal(item["matecoin_price"])
-        profit["matecoin_account"] += Decimal(item["bought"] or "0.0") - Decimal(item["sold"] or "0.0")
-    for key, val in profit.items():
-        profit[key] = str(val)
+        profit["matecoin_account"] += bought - sold
+    for key, value in profit.items():
+        profit[key] = str(value)
     with open("profit.json", "w") as profit_json:
         json.dump(profit, profit_json, indent=2)
