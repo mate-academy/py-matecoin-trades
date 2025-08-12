@@ -1,4 +1,5 @@
 import json
+import os
 from decimal import Decimal
 
 
@@ -8,26 +9,26 @@ def calculate_profit(file_name: str) -> None:
         trades = json.load(f)
 
     coin_balance = Decimal("0")
-    avg_buy_price = Decimal("0")
     profit = Decimal("0")
 
     for trade in trades:
         price = Decimal(str(trade["matecoin_price"]))
+        buy_size = Decimal(str(trade["bought"] or "0"))
+        sell_size = Decimal(str(trade["sold"] or "0"))
 
-        if trade["bought"] > 0:
-            buy_size = Decimal(str(trade["bought"]))
-            avg_buy_price = (
-                (avg_buy_price * coin_balance) + (price * buy_size)
-            ) / (coin_balance + buy_size)
+        if buy_size > 0:
             coin_balance += buy_size
+            profit -= buy_size * price
 
-        if trade["sold"] > 0:
-            sell_size = Decimal(str(trade["sold"]))
-            profit += sell_size * (price - avg_buy_price)
+        if sell_size > 0:
             coin_balance -= sell_size
+            profit += sell_size * price
 
-    with open("profit.json", "w") as f:
-        json.dump({
-            "earned_money": str(profit),
-            "matecoin_account": str(coin_balance)
-        }, f, indent=2)
+    data_to_file = {
+        "earned_money": str(profit),
+        "matecoin_account": str(coin_balance)
+    }
+    profit_file_path = os.path.join(os.path.dirname(file_name), "profit.json")
+
+    with open(profit_file_path, "w", encoding="utf-8") as file:
+        json.dump(data_to_file, file, indent=2)
