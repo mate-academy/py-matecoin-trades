@@ -1,1 +1,2 @@
-# write your code here
+def calculate_profit(name: str) -> None:
+    pass
