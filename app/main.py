@@ -3,6 +3,9 @@ from decimal import Decimal
 from pathlib import Path
 
 
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+
 def calculate_profit(file_name: str) -> None:
     with open(file_name) as f:
         trades = json.load(f)
@@ -25,8 +28,6 @@ def calculate_profit(file_name: str) -> None:
         "earned_money": str(earned_money),
         "matecoin_account": str(matecoin_account)
     }
-
-    BASE_DIR = Path(__file__).resolve().parent.parent
 
     with open(f"{BASE_DIR}/profit.json", "w") as f:
         json.dump(result, f, indent=2)
