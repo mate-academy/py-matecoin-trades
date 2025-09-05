@@ -10,6 +10,7 @@ def calculate_profit(file_name: str) -> None:
     matecoin_account = Decimal("0")
 
     for trade in trades:
+        print(trade)
         if trade["bought"] is not None:
             matecoin_account += Decimal(trade["bought"])
             earned_money -= (
