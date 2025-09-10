@@ -1,7 +1,5 @@
 from decimal import Decimal
 import json
-import os
-
 
 def calculate_profit(trades: str) -> None:
 
@@ -22,9 +20,7 @@ def calculate_profit(trades: str) -> None:
                 matecoin_account -= decimal_sold
                 earned_money += decimal_sold * decimal_trade
 
-    profit_os_path = os.path.join(os.path.dirname(__file__), "PROFIT.json")
-
-    with open(profit_os_path, "w", encoding="utf-8") as file_2:
+    with open("profit.json", "w", encoding="utf-8") as file_2:
         json.dump({"earned_money": str(earned_money),
                    "matecoin_account": str(matecoin_account)},
-                  file_2, indent=4)
+                  file_2, indent=2)
