@@ -22,7 +22,7 @@ def calculate_profit(trades: str) -> None:
                 matecoin_account -= decimal_sold
                 earned_money += decimal_sold * decimal_trade
 
-    profit_os_path = os.path.join(os.path.dirname(__file__), "profit.json")
+    profit_os_path = os.path.join(os.path.dirname(__file__), "PROFIT.json")
 
     with open(profit_os_path, "w", encoding="utf-8") as file_2:
         json.dump({"earned_money": str(earned_money),
