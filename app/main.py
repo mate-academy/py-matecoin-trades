@@ -3,7 +3,7 @@ from decimal import Decimal
 
 
 def _to_str(dec: Decimal) -> str:
-    return format(dec.normalize(), 'f') if dec != 0 else "0"
+    return format(dec.normalize(), "f") if dec != 0 else "0"
 
 
 def calculate_profit(name: str) -> None:
