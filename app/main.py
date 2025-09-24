@@ -16,7 +16,8 @@ from decimal import Decimal
 #         else:
 #             if trade["bought"]:
 #                 earned_money -=\
-#                     Decimal(trade["bought"]) * Decimal(trade["matecoin_price"])
+#                     Decimal(trade["bought"])
+#                     * Decimal(trade["matecoin_price"])
 #                 matecoin_account += Decimal(trade["bought"])
 #     result = {
 #         "earned_money": str(earned_money),
@@ -53,4 +54,3 @@ def calculate_profit(trades: str) -> dict:
 
     with open("profit.json", "w") as file:
         json.dump(result, file, indent=2)
-
