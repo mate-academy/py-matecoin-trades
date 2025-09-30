@@ -3,9 +3,17 @@ import json
 import os
 
 
-DEFAULT_PROFIT_FILE = os.path.join(os.path.dirname(__file__), "..", "profit.json")
+DEFAULT_PROFIT_FILE = (os.path.join
+                       (os.path.dirname(__file__),
+                        "..",
+                        "profit.json")
+                       )
 
-def calculate_profit(trades_file: str, profit_file: str = DEFAULT_PROFIT_FILE) -> None:
+
+def calculate_profit(
+        trades_file: str,
+        profit_file: str = DEFAULT_PROFIT_FILE
+) -> None:
     with open(trades_file, "r") as f:
         trades = json.load(f)
     earned_money = Decimal("0")
