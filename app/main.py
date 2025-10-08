@@ -26,6 +26,6 @@ def calculate_profit(trades_file_path):
     }
 
     with open("profit.json", "w") as file:
-        json.dump(profit_data, file)
+        json.dump(profit_data, file, indent=2)
 
     return None
