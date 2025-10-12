@@ -1,5 +1,6 @@
 import json
 from decimal import Decimal
+from typing import Any
 
 
 def calculate_profit(trades_file: str) -> None:
