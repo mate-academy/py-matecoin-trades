@@ -11,16 +11,28 @@ def calculate_profit(file_name: str) -> None:
 
     for transaction in trades:
         if transaction["bought"]:
-            money_waste -= Decimal(transaction["bought"]) * Decimal(transaction["matecoin_price"])
+            money_waste -= Decimal(transaction["bought"]) * Decimal(
+                transaction["matecoin_price"]
+            )
             coin_amount += Decimal(transaction["bought"])
         if transaction["sold"]:
-            money_waste += Decimal(transaction["sold"]) * Decimal(transaction["matecoin_price"])
+            money_waste += Decimal(transaction["sold"]) * Decimal(
+                transaction["matecoin_price"]
+            )
             coin_amount -= Decimal(transaction["sold"])
 
-    result = {"earned_money": str(money_waste), "matecoin_account": str(coin_amount)}
+    result = {
+        "earned_money": str(money_waste),
+        "matecoin_account": str(coin_amount)
+    }
 
     with open("profit.json", "w") as profit:
         json.dump(result, profit, indent=2)
 
-if __name__=="__main__":
-    print(calculate_profit("/home/acidcor/PycharmProjects/py-matecoin-trades/app/trades.json"))
+
+if __name__ == "__main__":
+    print(
+        calculate_profit(
+            "/home/acidcor/PycharmProjects/py-matecoin-trades/app/trades.json"
+        )
+    )
