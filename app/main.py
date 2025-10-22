@@ -23,7 +23,7 @@ def calculate_profit(trades_path: str) -> None:
                 * Decimal(trade.get("matecoin_price"))
             )
             earned_money -= cost
-        elif (
+        if (
             trade.get("sold") is not None
             and isinstance(trade.get("sold"), str)
         ):
