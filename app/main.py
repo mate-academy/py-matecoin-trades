@@ -2,12 +2,11 @@ import json
 from decimal import Decimal
 
 
-
 def calculate_profit(trades_path: str) -> None:
     if trades_path is None or not isinstance(trades_path, str):
         return
 
-    with open(trades_path, 'r') as json_trades:
+    with open(trades_path, "r") as json_trades:
         trades = json.load(json_trades)
 
     matecoin_account = Decimal("0.0")
