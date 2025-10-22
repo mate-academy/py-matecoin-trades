@@ -14,13 +14,25 @@ def calculate_profit(trades_path: str) -> None:
     earned_money = Decimal("0.0")
 
     for trade in trades:
-        if trade.get("bought") is not None and isinstance(trade.get("bought"), str):
+        if (
+                trade.get("bought") is not None
+                and isinstance(trade.get("bought"), str)
+        ):
             matecoin_account += Decimal(trade.get("bought"))
-            cost = Decimal(trade.get("bought")) * Decimal(trade.get("matecoin_price"))
+            cost = (
+                Decimal(trade.get("bought"))
+                * Decimal(trade.get("matecoin_price"))
+            )
             earned_money -= cost
-        elif trade.get("sold") is not None and isinstance(trade.get("sold"), str):
+        elif (
+            trade.get("sold") is not None
+            and isinstance(trade.get("sold"), str)
+        ):
             matecoin_account -= Decimal(trade.get("sold"))
-            revenue = Decimal(trade.get("sold")) * Decimal(trade.get("matecoin_price"))
+            revenue = (
+                Decimal(trade.get("sold"))
+                * Decimal(trade.get("matecoin_price"))
+            )
             earned_money += revenue
 
     final_result = {
@@ -28,7 +40,8 @@ def calculate_profit(trades_path: str) -> None:
         "matecoin_account": str(matecoin_account),
     }
 
-    with open('profit.json', 'w') as profit_file:
+    with open("profit.json", "w") as profit_file:
         json.dump(final_result, profit_file, indent=2)
+
 
 calculate_profit(trades_path="app/trades.json")
