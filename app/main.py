@@ -20,13 +20,14 @@ def calculate_profit(fail_name: str) -> None:
                 earned_money += Decimal(trade["sold"]
                                         ) * Decimal(trade["matecoin_price"])
 
-        matecoin_account_str = str(matecoin_account)
-        earned_money_str = str(earned_money)
-        result_dict["earned_money"] = earned_money_str
-        result_dict["matecoin_account"] = matecoin_account_str
+        result = {
+            "earned_money": str(earned_money),
+            "matecoin_account": str(matecoin_account)
+        }
 
     with open("profit.json", "w") as f:
-        json.dump(result_dict, f, indent=2)
+        json.dump(result, f, indent=2)
 
 
-calculate_profit("trades.json")
+if __name__ == "__main__":
+    calculate_profit("trades.json")
