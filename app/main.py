@@ -6,7 +6,6 @@ def calculate_profit(fail_name: str) -> None:
 
     with open(fail_name, "r") as json_data:
         trades_data = json.load(json_data)
-        result_dict = {}
         matecoin_account = Decimal("0")
         earned_money = Decimal("0")
         for trade in trades_data:
