@@ -2,3 +2,4 @@
 
 def empty_function() -> None:
     pass
+    pass
