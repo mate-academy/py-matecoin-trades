@@ -27,5 +27,6 @@ def calculate_profit(filename: str) -> None:
         "matecoin_account": str(matecoin_account)
     }
 
+    # Zapisz jako sformatowany string JSON (pretty-print)
     with open("profit.json", "w") as outfile:
-        json.dump(result, outfile)
+        json.dump(result, outfile, indent=2)
