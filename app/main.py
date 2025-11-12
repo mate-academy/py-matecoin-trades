@@ -23,9 +23,12 @@ def calculate_profit(file_path: str) -> None:
             result_json["matecoin_account"] -= amount
             result_json["earned_money"] += price * amount
 
+    result_json["matecoin_account"] = str(result_json["matecoin_account"])
+    result_json["earned_money"] = str(result_json["earned_money"])
+
     with open("profit.json", "w") as file:
-        json.dump(result_json, file, indent=2, default=str)
-    print(json.dumps(result_json, indent=2, default=str))
+        json.dump(result_json, file, indent=2)
+    print(json.dumps(result_json, indent=2))
 
 
 if __name__ == "__main__":
