@@ -7,10 +7,12 @@ def get_a_trades() -> list:
         trades = json.load(file)
     return trades
 
+
 def write_trades(trades: dict) -> None:
     with open("profit.json", "w") as file:
         json.dump(trades, file, indent=2, default=str)
     print(json.dumps(trades, indent=2, default=str))
+
 
 def calculate_profit() -> None:
     trades = get_a_trades()
@@ -32,6 +34,7 @@ def calculate_profit() -> None:
             result_json["earned_money"] += price * amount
 
     write_trades(result_json)
+
 
 if __name__ == "__main__":
     calculate_profit()
