@@ -27,4 +27,4 @@ def calculate_profit(name_file: str) -> None:
                     }
 
     with open("profit.json", "w") as json_file:
-        json.dump(total_profit, json_file)
+        json.dump(total_profit, json_file, indent=2)
