@@ -20,8 +20,9 @@ def calculate_profit(trades: Any) -> None:
                             + (Decimal(element["sold"])
                                * Decimal(element["matecoin_price"])))
             matecoin_account = matecoin_account - Decimal(element["sold"])
-    profit_directory = os.path.dirname(trades)
-    profit_path = os.path.join(profit_directory, "profit.json")
+    app_directory = os.path.dirname(trades)
+    base_directory = os.path.dirname(app_directory)
+    profit_path = os.path.join(base_directory, "profit.json")
     profit_file = {
         "earned_money": str(earned_money),
         "matecoin_account": str(matecoin_account)
