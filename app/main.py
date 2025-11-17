@@ -1,9 +1,11 @@
 import json
 from decimal import Decimal
 from decimal import getcontext
+from decimal import InvalidOperation
 getcontext().prec = 50
 
-def calculate_profit(trades_file="trades.json"):
+
+def calculate_profit(trades_file: str = "trades.json") -> None:
 
     earned_money = Decimal("0")
     matecoin_account = Decimal("0")
@@ -21,7 +23,7 @@ def calculate_profit(trades_file="trades.json"):
     except json.JSONDecodeError:
         print(f"Error: O arquivo {trades_file} não é um JSON válido.")
         return
-    
+
     for trade in trades:
         try:
             price = Decimal(trade["matecoin_price"])
@@ -35,8 +37,8 @@ def calculate_profit(trades_file="trades.json"):
                 amount = Decimal(trade["sold"])
                 matecoin_account -= amount
                 earned_money += amount * price
-        except Exception as e:
-            print(f"Error ao processar a trade {trade}: {e}")
+        except (KeyError, InvalidOperation) as e:
+            print(f"Error ao processar a transação {trade}: {e}")
 
     result_data = {
         "earned_money": str(earned_money),
@@ -47,5 +49,5 @@ def calculate_profit(trades_file="trades.json"):
         with open(output_filename, "w", encoding="utf-8") as f:
             json.dump(result_data, f, indent=2)
         print(f"Sucesso! Resultados salvos em {output_filename}")
-    except IOError:
-        print(f"Error: Não foi possível escrever no arquivo {output_filename}")
+    except OSError as e:
+        print(f"Error: Não foi possível escrever no arquivo {output_filename}: {e}")
