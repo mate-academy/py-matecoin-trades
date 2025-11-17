@@ -33,7 +33,7 @@ def calculate_profit(trades_file: str = "trades.json") -> None:
                 matecoin_account += amount
                 earned_money -= amount * price
 
-            elif trade.get("sold"):
+            if trade.get("sold"):
                 amount = Decimal(trade["sold"])
                 matecoin_account -= amount
                 earned_money += amount * price
