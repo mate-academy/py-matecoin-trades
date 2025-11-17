@@ -13,7 +13,8 @@ def calculate_profit(filename: str) -> None:
     # Обробка кожної угоди
     for trade in trades:
         price = Decimal(trade["matecoin_price"])
-        bought = Decimal(trade["bought"]) if trade.get("bought") else Decimal("0")
+        bought = Decimal(trade["bought"]) if (
+            trade.get("bought")) else Decimal("0")
         sold = Decimal(trade["sold"]) if trade.get("sold") else Decimal("0")
 
         # Поточний баланс монет
