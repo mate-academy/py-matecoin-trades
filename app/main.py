@@ -21,7 +21,7 @@ def calculate_profit(trades_file = "trades.json"):
     except json.JSONDecodeError:
         print(f"Error: O arquivo {trades_file} não é um JSON válido.")
         return
-    
+
     for trade in trades:
         try:
             price = Decimal(trade["matecoin_price"])
@@ -30,7 +30,7 @@ def calculate_profit(trades_file = "trades.json"):
                 amount = Decimal(trade["bought"])
                 matecoin_account += amount
                 earned_money -= amount * price
-            
+
             elif trade.get("sold"):
                 amount = Decimal(trade["sold"])
                 matecoin_account -= amount
@@ -47,4 +47,7 @@ def calculate_profit(trades_file = "trades.json"):
             json.dump(result_data, f, indent=2)
         print(f"Sucesso! Resultados salvos em {output_filename}")
     except IOError:
-        print(f"Error: Não foi possível escrever no arquivo {output_filename}.")
+        print(
+            "Error: Não foi possível escrever no arquivo "
+            f"{output_filename}."
+        )
