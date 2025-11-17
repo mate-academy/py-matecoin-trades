@@ -2,9 +2,9 @@ import json
 from decimal import Decimal
 
 
-def calculate_profit(file):
+def calculate_profit(filename: str) -> None:
     matecoin_account, earned_money = 0, 0
-    with open(file, "r") as f:
+    with open(filename, "r") as f:
         trades = f.read()
     trades = json.loads(trades)
     for trade in trades:
@@ -23,4 +23,3 @@ def calculate_profit(file):
                 }
             )
         )
-calculate_profit("trades.json")
