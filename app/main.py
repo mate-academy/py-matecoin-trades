@@ -50,5 +50,8 @@ def calculate_profit(trades_file: str = "trades.json") -> None:
             json.dump(result_data, f, indent=2)
         print(f"Sucesso! Resultados salvos em {output_filename}")
     except OSError as e:
-        error_message = f"Error: Não foi possível escrever no arquivo {output_filename}: {e}"
+        error_message = (
+            f"Error: Não foi possível escrever no arquivo "
+            f"{output_filename}: {e}"
+        )
         print(error_message)
