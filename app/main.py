@@ -38,5 +38,3 @@ def calculate_profit(file_name: str) -> Dict[str, str]:
     # Сохраняем в profit.json
     with open("profit.json", "w", encoding="utf-8") as output:
         json.dump(result, output, indent=2)
-
-    return result
