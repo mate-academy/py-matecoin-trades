@@ -1,4 +1,3 @@
-import os
 import json
 from decimal import Decimal
 
@@ -27,4 +26,3 @@ def calculate_profit(source_file: str) -> None:
             "matecoin_account": str(total_matecoin)
         }
         json.dump(body, json_file, indent=2)
-
