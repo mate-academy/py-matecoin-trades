@@ -4,8 +4,7 @@ from decimal import Decimal, getcontext
 getcontext().prec = 28
 
 
-def calculate_profit(filename: str):
-    # Читаем файл с трейдами
+def calculate_profit(filename: str) -> None:
     with open(filename, "r") as f:
         trades = json.load(f)
 
@@ -30,6 +29,5 @@ def calculate_profit(filename: str):
         "matecoin_account": str(matecoin_account)
     }
 
-    # Записываем результат в profit.json
     with open("profit.json", "w") as f:
         json.dump(result, f, indent=2)
