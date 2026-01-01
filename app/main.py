@@ -9,7 +9,7 @@ def calculate_profit(file_name: str) -> None:
     earned_money = Decimal("0")
     matecoin_account = Decimal("0")
 
-    with open(f"{file_name}.json", "r") as f:
+    with open(file_name, "r") as f:
         dicts = json.load(f)
 
     for something in dicts:
@@ -28,4 +28,4 @@ def calculate_profit(file_name: str) -> None:
     res_dict["matecoin_account"] = str(matecoin_account)
 
     with open("profit.json", "w") as f:
-        json.dump(res_dict, f)
+        json.dump(res_dict, f, indent=2)
