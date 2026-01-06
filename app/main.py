@@ -25,14 +25,13 @@ def calculate_profit(filename: str) -> Decimal:
             amount = Decimal(str(sold))
             matecoin_account -= amount
             earned_money += amount * price
-
     result = {
-        "matecoin_account": str(matecoin_account),
-        "earned_money": str(earned_money)
+        "earned_money": str(earned_money),
+        "matecoin_account": str(matecoin_account)
     }
 
     with open("profit.json", "w") as outfile:
-        json.dump(result, outfile, indent=4)
+        json.dump(result, outfile, indent=2)
 
 
 if __name__ == "__main__":
