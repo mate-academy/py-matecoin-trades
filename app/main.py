@@ -4,29 +4,31 @@ from decimal import Decimal
 
 def calculate_profit(file_name: str) -> None:
 
-    profit = Decimal()
-    qty = Decimal()
+    result = {
+        "earned_money" : Decimal(0),
+        "matecoin_account" : Decimal(0)
+    }
 
     with open(file=file_name, mode="r") as file:
         trades = json.load(file)
 
         for trade in trades:
-            value = trade["bought"]
-            bought_units = value if value is not None else 0
-            bought_units = Decimal(bought_units)
-
-            value = trade["sold"]
-            sold_units = value if value is not None else 0
-            sold_units = Decimal(sold_units)
-
             price = Decimal(trade["matecoin_price"])
-            profit += (sold_units * price - bought_units * price)
-            qty += (bought_units - sold_units)
 
-    info = {
-        "earned_money" : str(profit),
-        "matecoin_account" : str(qty)
+            if trade.get("bought"):
+                bought_qty = Decimal(trade["bought"])
+                result["earned_money"] -= Decimal(bought_qty * price)
+                result["matecoin_account"] += Decimal(bought_qty)
+
+            if trade.get("sold"):
+                sold_qty = Decimal(trade["sold"])
+                result["earned_money"] += Decimal(sold_qty * price)
+                result["matecoin_account"] -= Decimal(sold_qty)
+
+    file_content = {
+        "earned_money" : str(result["earned_money"]),
+        "matecoin_account" : str(result["matecoin_account"])
     }
 
     with open(file="profit.json", mode="w") as file:
-        file.write(json.dumps(obj=info, indent=4))
+        json.dump(file_content, file, indent=4)
