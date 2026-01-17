@@ -7,6 +7,7 @@ def calculate_profit(filename: str) -> None:
         raise Exception(f"File {filename} does not end with .json")
 
     data = []
+
     with open(filename, encoding="utf-8") as f:
         data = json.load(f)
 
@@ -22,7 +23,6 @@ def calculate_profit(filename: str) -> None:
             bought = Decimal(trade["bought"])
             result["earned_money"] -= bought * price
             result["matecoin_account"] += bought
-
 
         if trade.get("sold"):
             sold = Decimal(trade["sold"])
