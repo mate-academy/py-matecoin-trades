@@ -17,13 +17,13 @@ def calculate_profit(file_name: str) -> None:
 
             if trade.get("bought"):
                 bought_qty = Decimal(trade["bought"])
-                result["earned_money"] -= Decimal(bought_qty * price)
-                result["matecoin_account"] += Decimal(bought_qty)
+                result["earned_money"] -= bought_qty * price
+                result["matecoin_account"] += bought_qty
 
             if trade.get("sold"):
                 sold_qty = Decimal(trade["sold"])
-                result["earned_money"] += Decimal(sold_qty * price)
-                result["matecoin_account"] -= Decimal(sold_qty)
+                result["earned_money"] += sold_qty * price
+                result["matecoin_account"] -= sold_qty
 
     file_content = {
         "earned_money" : str(result["earned_money"]),
