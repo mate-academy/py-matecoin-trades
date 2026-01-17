@@ -20,7 +20,7 @@ def calculate_profit(file_name: str) -> None:
             sold_units = Decimal(sold_units)
 
             price = Decimal(trade["matecoin_price"])
-            profit += (bought_units * price + sold_units * price)
+            profit += (bought_units * price - sold_units * price)
             qty += (bought_units - sold_units)
 
     info = {
