@@ -29,4 +29,4 @@ def calculate_profit(file_name: str) -> None:
     }
 
     with open(file="profit.json", mode="w") as file:
-        file.write(json.dumps(info))
+        file.write(json.dumps(obj=info, indent=4))
