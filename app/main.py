@@ -15,13 +15,13 @@ def calculate_profit(trades_file: str) -> None:
         if trade["bought"] is not None:
             amount_bought = Decimal(trade["bought"])
             matecoin_account += amount_bought
-            # Comprar gasta dinheiro (valor negativo)
+            # Comprar reduz o saldo em dólares
             earned_money -= amount_bought * price
 
         if trade["sold"] is not None:
             amount_sold = Decimal(trade["sold"])
             matecoin_account -= amount_sold
-            # Vender gera dinheiro (valor positivo)
+            # Vender aumenta o saldo em dólares
             earned_money += amount_sold * price
 
     result = {
@@ -30,4 +30,5 @@ def calculate_profit(trades_file: str) -> None:
     }
 
     with open("profit.json", "w") as file:
-        json.dump(result, file)
+        # O argumento indent=2 adiciona a formatação esperada pelo teste
+        json.dump(result, file, indent=2)
