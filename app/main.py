@@ -1,1 +1,33 @@
-# write your code here
+import json
+from decimal import Decimal
+
+
+def calculate_profit() -> dict:
+    with open("trades.json") as f:
+        trades = json.load(f)
+
+    matecoin_account = Decimal("0")
+    earned_money = Decimal("0")
+
+    for trade in trades:
+        price = Decimal(trade["matecoin_price"])
+
+        if trade["bought"] is not None:
+            amount = Decimal(trade["bought"])
+            matecoin_account += amount
+            earned_money -= amount * price
+
+        if trade["sold"] is not None:
+            amount = Decimal(trade["sold"])
+            matecoin_account -= amount
+            earned_money += amount * price
+
+    result = {
+        "earned_money": str(matecoin_account),
+        "matecoin_account": str(earned_money)
+    }
+
+    with open("profit.json", "w") as f:
+        json.dump(result, f)
+
+    return result
