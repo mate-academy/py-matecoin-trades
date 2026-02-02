@@ -23,11 +23,15 @@ def calculate_profit() -> dict:
             earned_money += amount * price
 
     result = {
-        "matecoin_account": str(matecoin_account),
-        "earned_money": str(earned_money)
+        "earned_money": str(earned_money),
+        "matecoin_account": str(matecoin_account)
+
     }
 
     with open("profit.json", "w") as f:
         json.dump(result, f)
 
     return result
+
+result = calculate_profit()
+print(result)
