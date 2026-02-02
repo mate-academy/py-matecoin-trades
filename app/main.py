@@ -32,6 +32,3 @@ def calculate_profit() -> dict:
         json.dump(result, f)
 
     return result
-
-result = calculate_profit()
-print(result)
