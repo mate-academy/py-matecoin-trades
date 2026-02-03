@@ -1,10 +1,9 @@
 import json
-
 from decimal import Decimal
 
 
-def calculate_profit() -> dict:
-    with open("trades.json", encoding="utf-8") as f:
+def calculate_profit(trades_file: str) -> None:
+    with open(trades_file, encoding="utf-8") as f:
         trades = json.load(f)
 
     matecoin_account = Decimal("0")
@@ -25,11 +24,8 @@ def calculate_profit() -> dict:
 
     result = {
         "earned_money": format(earned_money, "f"),
-        "matecoin_account": format(matecoin_account, "f")
-
+        "matecoin_account": format(matecoin_account, "f"),
     }
 
     with open("profit.json", "w", encoding="utf-8") as f:
-        json.dump(result, f)
-
-    return result
+        json.dump(result, f, indent=2)
