@@ -2,7 +2,7 @@ import decimal
 import json
 
 
-def calculate_profit(archive: str):
+def calculate_profit(archive: str) -> None:
     with open(archive, "r") as f:
         trades = json.load(f)
     bought_balance = []
