@@ -7,13 +7,12 @@ def calculate_profit() -> None:
     with open("trades.json", "r") as f:
         wallet = json.load(f)
     for coin in wallet:
+        price = Decimal(coin["matecoin_price"])
         if coin["bought"] is not None:
-            result["earned_money"]\
-                -= Decimal(coin["bought"]) * Decimal(coin["matecoin_price"])
+            result["earned_money"] -= Decimal(coin["bought"]) * price
             result["matecoin_account"] += Decimal(coin["bought"])
         if coin["sold"] is not None:
-            result["earned_money"]\
-                += Decimal(coin["sold"]) * Decimal(coin["matecoin_price"])
+            result["earned_money"] += Decimal(coin["sold"]) * price
             result["matecoin_account"] -= Decimal(coin["sold"])
     earned = result["earned_money"]
     balance = result["matecoin_account"]
