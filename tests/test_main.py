@@ -11,7 +11,7 @@ from app.main import calculate_profit
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-TRADES = f"{BASE_DIR}/app/trades.json"
+TRADES = f"{BASE_DIR}/app/trades1.json"
 PROFIT = f"{BASE_DIR}/profit.json"
 
 
