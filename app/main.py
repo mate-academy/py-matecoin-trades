@@ -9,16 +9,13 @@ PROFIT = f"{BASE_DIR}/profit.json"
 
 
 def calculate_profit(filename: str) -> None:
+    earned_money = Decimal("0")
+    matecoin_account = Decimal("0")
     try:
         with open(filename, "r") as f:
             content = json.load(f)
     except (FileNotFoundError, json.JSONDecodeError):
         content = []
-    earned_money = Decimal("0")
-    matecoin_account = Decimal("0")
-    trades = []
-    if not trades:
-        print("trades is empty")
     if isinstance(content, dict):
         earned_money = Decimal(str(content.get("earned_money", "0")))
         matecoin_account = Decimal(str(content.get("matecoin_account", "0")))
