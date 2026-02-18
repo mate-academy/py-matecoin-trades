@@ -7,6 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 TRADES = f"{BASE_DIR}/app/trades.json"
 PROFIT = f"{BASE_DIR}/profit.json"
 
+
 def calculate_profit(filename: str) -> None:
     try:
         with open(filename, "r") as f:
@@ -34,6 +35,8 @@ def calculate_profit(filename: str) -> None:
             sold = Decimal(str(trade.get("sold")))
             earned_money += sold * price
             matecoin_account -= sold
-    result = {"earned_money": str(earned_money), "matecoin_account": str(matecoin_account)}
+    result = {
+        "earned_money": str(earned_money),
+        "matecoin_account": str(matecoin_account)}
     with open(PROFIT, "w") as f:
         json.dump(result, f, indent=2, ensure_ascii=False)
