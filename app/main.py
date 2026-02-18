@@ -1,14 +1,10 @@
 import json
 from decimal import Decimal
 from pathlib import Path
->>>>>>> dfbf2b4
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-=======
-
 
 BASE_DIR = Path(__file__).resolve().parent.parent
->>>>>>> dfbf2b4 (Solution)
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 TRADES = f"{BASE_DIR}/app/trades.json"
 PROFIT = f"{BASE_DIR}/profit.json"
 
@@ -28,7 +24,6 @@ def calculate_profit(filename: str) -> None:
         else:
             trades = []
 
-<<<<<<< HEAD
         for trade in trades:
             price = Decimal(str(trade.get("matecoin_price") or "0"))
             if trade.get("bought") not in (None, ""):
@@ -48,7 +43,7 @@ def calculate_profit(filename: str) -> None:
 
         with open("profit.json", "w") as json_file:
             json.dump(result, json_file, indent=2, ensure_ascii=False)
-=======
+
     for trade in trades:
         price = Decimal(str(trade.get("matecoin_price") or "0"))
         if trade.get("bought") not in (None, ""):
@@ -68,4 +63,3 @@ def calculate_profit(filename: str) -> None:
 
     with open("profit.json", "w") as json_file:
         json.dump(result, json_file, indent=2, ensure_ascii=False)
->>>>>>> dfbf2b4 (Solution)
