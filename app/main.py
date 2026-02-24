@@ -25,7 +25,6 @@ def calculate_profit(filename: str) -> None:
 
     with open("profit.json", "w") as outfile:
         json.dump(result, outfile, indent=2, sort_keys=True)
-        outfile.write("\n")
 
 
 if __name__ == "__main__":
