@@ -1,9 +1,10 @@
 import json
 from decimal import Decimal
 
+
 def calculate_profit(file_name: str) -> None:
     try:
-        with open(file_name, 'r') as f:
+        with open(file_name, "r") as f:
             data = json.load(f)
     except FileNotFoundError:
         print(f"File: {file_name} not found")
