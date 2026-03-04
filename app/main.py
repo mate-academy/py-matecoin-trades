@@ -1,44 +1,31 @@
 import json
 from decimal import Decimal
-from typing import Dict, Any
-import os
+from tempfile import NamedTemporaryFile
+from app.main import calculate_profit
 
 
-def calculate_profit(filename: str) -> None:
-    with open(filename, "r", encoding="utf-8") as file:
-        trades = json.load(file)
+def test_calculate_profit_runs_without_error() -> None:
+    # Создаём временный trades.json
+    trades_data = [
+        {"bought": "0.00111", "sold": None, "matecoin_price": "48911.23"},
+        {"bought": None, "sold": "0.00058", "matecoin_price": "77830.83"}
+    ]
 
-    earned_money = Decimal("0")
-    matecoin_account = Decimal("0")
+    # NamedTemporaryFile с delete=False, чтобы calculate_profit мог открыть файл
+    with NamedTemporaryFile("w+", suffix=".json", delete=False) as temp_file:
+        json.dump(trades_data, temp_file)
+        temp_file_path = temp_file.name
 
-    for trade in trades:
-        bought = trade.get("bought")
-        sold = trade.get("sold")
-        price = Decimal(trade["matecoin_price"])
+    # Вызываем функцию с временным файлом
+    calculate_profit(temp_file_path)
 
-        if bought is not None:
-            bought_amount = Decimal(bought)
-            matecoin_account += bought_amount
-            earned_money -= bought_amount * price
+    # Проверяем, что создан файл profit.json
+    with open("profit.json", "r", encoding="utf-8") as f:
+        result = json.load(f)
 
-        if sold is not None:
-            sold_amount = Decimal(sold)
-            matecoin_account -= sold_amount
-            earned_money += sold_amount * price
-
-    result: Dict[str, Any] = {
-        "earned_money": str(earned_money),
-        "matecoin_account": str(matecoin_account),
-    }
-
-    with open("profit.json", "w", encoding="utf-8") as file:
-        json.dump(result, file)
-
-
-if __name__ == "__main__":
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    trades_path = os.path.join(base_dir, "..", "trades.json")
-    trades_path = os.path.normpath(trades_path)
-
-    calculate_profit(trades_path)
-    print("Profit calculated and saved to profit.json")
+    # Проверка, что ключи есть и значения корректного типа
+    assert "earned_money" in result
+    assert "matecoin_account" in result
+    # Проверяем, что значения можно превратить в Decimal
+    Decimal(result["earned_money"])
+    Decimal(result["matecoin_account"])
