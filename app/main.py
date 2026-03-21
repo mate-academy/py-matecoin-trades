@@ -10,7 +10,6 @@ def calculate_profit(trades_file: str) -> None:
     matecoin_account = Decimal("0")
 
     for trade in trades:
-        # Convert strings/nulls to Decimal or 0
         price = Decimal(trade["matecoin_price"])
         bought = Decimal(trade["bought"] or "0")
         sold = Decimal(trade["sold"] or "0")
@@ -29,4 +28,4 @@ def calculate_profit(trades_file: str) -> None:
     }
 
     with open("profit.json", "w") as file:
-        json.dump(result, file)
+        json.dump(result, file, indent=2)
