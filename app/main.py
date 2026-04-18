@@ -2,10 +2,10 @@ from decimal import Decimal
 import json
 
 
-def calculate_profit() -> None:
+def calculate_profit(file_name: str) -> None:
     money = Decimal("0")
     coins = Decimal("0")
-    with open("trades.json", "r") as f:
+    with open(file_name, "r") as f:
         trades = json.load(f)
 
     for trade in trades:
@@ -29,4 +29,4 @@ def calculate_profit() -> None:
 
 
 if __name__ == "__main__":
-    calculate_profit()
+    calculate_profit("trades.json")
