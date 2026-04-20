@@ -29,13 +29,3 @@ def calculate_profit(file_name: str) -> None:
 
     with open("profit.json", "w") as file:
         json.dump(result, file, indent=2)
-
-
-if __name__ == "__main__":
-    calculate_profit("trades.json")
-
-    with open("profit.json", "r") as f:
-        data = json.load(f)
-
-    print(f"Income: {data['earned_money']}")
-    print(f"Left: {data['matecoin_account']}")
