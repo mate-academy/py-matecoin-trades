@@ -3,9 +3,9 @@ from decimal import Decimal
 import os
 
 
-def calculate_profit(filename: str) -> dict:
-    matecoin_account = 0
-    earned_money = 0
+def calculate_profit(filename: str) -> None:
+    matecoin_account = Decimal("0")
+    earned_money = Decimal("0")
 
     with open(filename) as file:
         trades = json.load(file)
@@ -22,10 +22,14 @@ def calculate_profit(filename: str) -> dict:
             matecoin_account -= Decimal(trade["sold"])
             earned_money += Decimal(trade["sold"]) * \
                 Decimal(trade["matecoin_price"])
-    return {
+    result = {
         "earned_money": f"{earned_money:f}",
         "matecoin_account": f"{matecoin_account:f}"
     }
+
+    # Write to profit.json
+    with open("profit.json", "w") as file:
+        json.dump(result, file, indent=2)
 
 
 def main() -> None:
@@ -34,10 +38,7 @@ def main() -> None:
 
     # Join it with the filename
     file_path = os.path.join(base_dir, "trades.json")
-    profit = calculate_profit(file_path)
-
-    with open(os.path.join(base_dir, "profit.json"), "w") as output_file:
-        json.dump(profit, output_file)
+    calculate_profit(file_path)
 
 
 if __name__ == "__main__":
