@@ -32,11 +32,8 @@ def calculate_profit(file_path: str) -> None:
             balance_usd += sold * price
             balance_coin -= sold
 
-        result = {
-            "earned_money": str(balance_usd),
-            "matecoin_account": str(balance_coin)
-        }
-        from_dict_to_json("profit.json", result)
-
-
-calculate_profit("trades.json")
+    result = {
+        "earned_money": str(balance_usd),
+        "matecoin_account": str(balance_coin)
+    }
+    from_dict_to_json("profit.json", result)
