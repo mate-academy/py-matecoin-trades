@@ -24,4 +24,4 @@ def calculate_profit(
                   "matecoin_account": str(matecoins)}
     profit_file = profit_file or "profit.json"
     with open(profit_file, "w") as write_file:
-        json.dump(write_data, write_file)
+        json.dump(write_data, write_file, indent=2)
