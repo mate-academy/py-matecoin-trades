@@ -34,4 +34,4 @@ def calculate_profit(file_name: str) -> None:
             dict_profit["matecoin_account"] -= Decimal(str(operation["sold"]))
 
     with open("profit.json", "w") as f:
-        json.dump(convert_profit_date_for_json(dict_profit), f)
+        json.dump(convert_profit_date_for_json(dict_profit), f, indent=2)
