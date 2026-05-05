@@ -3,12 +3,13 @@ import json
 
 
 def calculate_profit(
-        trade_file: str
+        trade_file: str,
+        profit_file: str | None = None
 ) -> None:
     with open(trade_file, "r") as read_file:
         trade_data = json.load(read_file)
-    profit = 0
-    matecoins = 0
+    profit = Decimal("0")
+    matecoins = Decimal("0")
     for trade in trade_data:
         price = Decimal(trade["matecoin_price"])
         if trade["sold"] is not None:
@@ -21,5 +22,6 @@ def calculate_profit(
             profit -= coins * price
     write_data = {"earned_money": str(profit),
                   "matecoin_account": str(matecoins)}
-    with open("profit.json", "w") as write_file:
+    profit_file = profit_file or "profit.json"
+    with open(profit_file, "w") as write_file:
         json.dump(write_data, write_file)
