@@ -11,7 +11,7 @@ def from_json_to_dict(file_path: str) -> Any:
 
 def from_dict_to_json(file_path: str, data: Any) -> None:
     with open(file_path, "w") as file:
-        json.dump(data, file, indent=4)
+        json.dump(data, file, indent=2)
 
 
 def calculate_profit(file_path: str) -> None:
