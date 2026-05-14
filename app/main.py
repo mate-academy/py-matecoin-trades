@@ -2,7 +2,7 @@ import json
 from decimal import Decimal
 
 
-def calculate_profit(filename: str):
+def calculate_profit(filename: str) -> None:
     with open(filename, "r") as file:
         trades = json.load(file)
 
@@ -12,8 +12,17 @@ def calculate_profit(filename: str):
     for trade in trades:
         price = Decimal(trade["matecoin_price"])
 
-        bought = Decimal(trade["bought"]) if trade["bought"] is not None else Decimal("0")
-        sold = Decimal(trade["sold"]) if trade["sold"] is not None else Decimal("0")
+        bought = (
+            Decimal(trade["bought"])
+            if trade["bought"] is not None
+            else Decimal("0")
+        )
+
+        sold = (
+            Decimal(trade["sold"])
+            if trade["sold"] is not None
+            else Decimal("0")
+        )
 
         if bought:
             earned_money -= price * bought
