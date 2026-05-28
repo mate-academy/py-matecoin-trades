@@ -5,7 +5,6 @@ import decimal
 def calculate_profit(filename: str) -> None:
     with open(filename, "r") as file:
        trade_list = json.load(file)
-
     earned_money = decimal.Decimal("0")
     matecoin_account = decimal.Decimal("0")
     for trade in trade_list:
