@@ -5,7 +5,7 @@ from decimal import Decimal
 def calculate_profit(trades: str) -> None:
     account = Decimal("0")
     earned_money = Decimal("0")
-    with open("trades") as f:
+    with open(trades) as f:
         trades_file = json.load(f)
     for trade in trades_file:
         bought_amount = Decimal(trade["bought"])
