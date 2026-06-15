@@ -8,14 +8,15 @@ def calculate_profit(trades: str) -> None:
     with open(trades) as f:
         trades_file = json.load(f)
     for trade in trades_file:
-        bought_amount = Decimal(trade["bought"])
         price = Decimal(trade["matecoin_price"])
         if trade["bought"]:
-            account += Decimal(trade["bought"])
-            earned_money -= bought_amount * price
+            sold_bought = Decimal(trade["bought"])
+            account += sold_bought
+            earned_money -= sold_bought * price
         if trade["sold"]:
-            account -= Decimal(trade["sold"])
-            earned_money += bought_amount * price
+            sold_amount = Decimal(trade["sold"])
+            account -= sold_amount
+            earned_money += sold_amount * price
 
     final_result = {
         "earned_money": str(earned_money),
