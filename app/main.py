@@ -2,6 +2,12 @@ import json
 from decimal import Decimal, ROUND_HALF_UP
 
 
+def format_decimal(value: Decimal) -> str:
+    precision = Decimal("0.00000001")
+    rounded = value.quantize(precision, rounding=ROUND_HALF_UP).normalize()
+    return f"{rounded:f}" if "E" in str(rounded) else str(rounded)
+
+
 def calculate_profit(filename: str) -> None:
     with open(filename, "r", encoding="utf-8") as f:
         trades = json.load(f)
@@ -22,15 +28,9 @@ def calculate_profit(filename: str) -> None:
             matecoin_account -= sold
             earned_money += sold * price
 
-    precision = Decimal("0.00000001")
-
     result = {
-        "earned_money": str(
-            earned_money.quantize(precision, rounding=ROUND_HALF_UP)
-        ),
-        "matecoin_account": str(
-            matecoin_account.quantize(precision, rounding=ROUND_HALF_UP)
-        ),
+        "earned_money": format_decimal(earned_money),
+        "matecoin_account": format_decimal(matecoin_account),
     }
 
     with open("profit.json", "w", encoding="utf-8") as f:
