@@ -14,7 +14,7 @@ def calculate_profit(file_name: str) -> None:
             dollars -= Decimal(i["matecoin_price"]) * Decimal(i["bought"])
         if i["sold"] is not None:
             coins -= Decimal(i["sold"])
-            dollars += Decimal(i["matecoin_price"]) * Decimal(i["bought"])
+            dollars += Decimal(i["matecoin_price"]) * Decimal(i["sold"])
     with open("profit.json", "w") as json_file:
         json_dict = {}
         json_dict["earned_money"] = str(dollars)
