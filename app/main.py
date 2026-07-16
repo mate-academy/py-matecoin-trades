@@ -19,5 +19,5 @@ def calculate_profit(file_name: str) -> None:
         json_dict = {}
         json_dict["earned_money"] = str(dollars)
         json_dict["matecoin_account"] = str(coins)
-        json_file.write(json.dumps(json_dict))
+        json.dump(json_dict, json_file)
     return None
