@@ -39,4 +39,3 @@ def calculate_profit(trades: dict[str, int]) -> None:
         json.dump(profit, f, indent=2)
 
     return None
-
