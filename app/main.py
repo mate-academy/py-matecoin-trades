@@ -1,6 +1,6 @@
-from decimal import Decimal
 import json
 import os
+from decimal import Decimal
 
 
 def calculate_profit(trades_file_name: str) -> None:
