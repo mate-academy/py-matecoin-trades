@@ -68,6 +68,7 @@ def test_default_create_profit_file():
     expected = '{\n  "earned_money": "49.8176904",\n  "matecoin_account": "0.00007"\n}'
 
     with CleanUpFile(PROFIT):
+        print(PROFIT)
         calculate_profit(TRADES)
 
         with open(PROFIT) as actual:
