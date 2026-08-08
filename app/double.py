@@ -6,22 +6,22 @@ def calculate_profit(file_name: str) -> None:
     with open(file_name, "r") as file:
         users_data = json.load(file)
 
-    total_bought = Decimal("0")
-    total_sold = Decimal("0")
-    matecoin_account = Decimal("0")
+        sum_of_bought = Decimal("0")
+        sum_of_sold = Decimal("0")
+        matecoin_account = Decimal("0")
 
     for user in users_data:
         if user["bought"]:
-            total_bought += (Decimal(user["bought"])
-                             * Decimal(user["matecoin_price"]))
+            sum_of_bought += (Decimal(user["bought"])
+                              * Decimal(user["matecoin_price"]))
             matecoin_account += Decimal(user["bought"])
         if user["sold"]:
-            total_sold += (Decimal(user["sold"])
-                           * Decimal(user["matecoin_price"]))
+            sum_of_sold += (Decimal(user["sold"])
+                            * Decimal(user["matecoin_price"]))
             matecoin_account -= Decimal(user["sold"])
 
     profit = {
-        "earned_money": str(total_sold - total_bought),
+        "earned_money": str(sum_of_sold - sum_of_bought),
         "matecoin_account": str(matecoin_account)
     }
 
