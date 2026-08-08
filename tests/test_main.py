@@ -73,7 +73,6 @@ def test_default_create_profit_file():
         with open(PROFIT) as actual:
             assert actual.read() == expected
 
-
 @pytest.mark.parametrize(
     "trades, profit",
     [
