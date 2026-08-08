@@ -30,7 +30,7 @@ class CleanUpFile:
 def test_function_should_return_none():
     with CleanUpFile(PROFIT):
         assert (
-            calculate_profit(TRADES) is None
+                calculate_profit(TRADES) is None
         ), "Function 'calculate_profit' should return None"
 
 
