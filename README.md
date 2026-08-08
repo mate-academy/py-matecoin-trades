@@ -13,7 +13,7 @@ price for 1 Matecoin in dollars that day.
 
 Example:
 ```javascript
-// trades.json
+// trades1.json
 [
   {
     "bought": "0.00111",
