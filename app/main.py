@@ -12,14 +12,12 @@ def calculate_profit(given_file: str) -> None:
     for deal in data:
         price = Decimal(deal["matecoin_price"])
 
-        bought = deal.get("bought")
-        if bought:
+        if bought := deal.get("bought"):
             amount = Decimal(bought)
             earned -= amount * price
             account += amount
 
-        sold = deal.get("sold")
-        if sold:
+        if sold := deal.get("sold"):
             amount = Decimal(sold)
             earned += amount * price
             account -= amount
