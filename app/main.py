@@ -17,7 +17,7 @@ def calculate_profit(file_name: str) -> None:
                 matecoin_account += bought
                 earned_money -= bought * price
 
-            elif transaction["sold"] is not None:
+            if transaction["sold"] is not None:
                 sold = Decimal(transaction["sold"])
                 matecoin_account -= sold
                 earned_money += price * sold
@@ -28,4 +28,4 @@ def calculate_profit(file_name: str) -> None:
     }
 
     with open("profit.json", "w") as file:
-        json.dump(result, file)
+        json.dump(result, file, indent=2)
