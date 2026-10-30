@@ -10,25 +10,22 @@ def calculate_profit(file_name: str) -> None:
     matecoin_account = Decimal("0")
 
     for trade in trades:
-        if trade["bought"]:
+        matecoin_price = Decimal(trade["matecoin_price"])
+
+        if trade["bought"] is not None:
             bought = Decimal(trade["bought"])
-            price = Decimal(trade["matecoin_price"])
-
+            earned_money -= bought * matecoin_price
             matecoin_account += bought
-            earned_money -= bought * price
 
-        if trade["sold"]:
+        if trade["sold"] is not None:
             sold = Decimal(trade["sold"])
-            price = Decimal(trade["matecoin_price"])
-
+            earned_money += sold * matecoin_price
             matecoin_account -= sold
-            earned_money += sold * price
+
+    result = {
+        "earned_money": str(earned_money),
+        "matecoin_account": str(matecoin_account),
+    }
 
     with open("profit.json", "w") as file:
-        json.dump(
-            {
-                "earned_money": str(earned_money),
-                "matecoin_account": str(matecoin_account),
-            },
-            file,
-        )
+        json.dump(result, file)
