@@ -1,12 +1,11 @@
 import json
 from decimal import Decimal
-from typing import Any, Dict
 
 
 def calculate_profit(
     trades_file: str = "trades.json",
     output_file: str = "profit.json",
-) -> Dict[str, Any]:
+) -> None:
     # Lê o arquivo JSON com as negociações usando json.load
     with open(trades_file, "r", encoding="utf-8") as f:
         trades = json.load(f)
@@ -38,5 +37,3 @@ def calculate_profit(
     # Exporta e salva os dados no arquivo profit.json usando json.dump
     with open(output_file, "w", encoding="utf-8") as f:
         json.dump(result, f, indent=2)
-
-    return result
