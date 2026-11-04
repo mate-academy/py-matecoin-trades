@@ -1,6 +1,5 @@
 import json
 from decimal import Decimal
-from pathlib import Path
 
 
 def calculate_profit(filename: str) -> None:
