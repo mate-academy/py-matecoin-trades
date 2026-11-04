@@ -40,7 +40,7 @@ in file `profit.json`
   "matecoin_account": "0.00053"
 }
 ```
-Use should use `Decimal` instead of `float` here, because `float`
+Use `Decimal` instead of `float` here, because `float`
 do not provide sufficient accuracy for monetary transactions.
 All numbers in json should be presented in string format.
 
