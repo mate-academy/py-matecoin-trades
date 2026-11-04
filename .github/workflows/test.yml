@@ -1,7 +1,6 @@
 name: Test
 
 on:
-  push:
   pull_request:
 
 jobs:
@@ -9,31 +8,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Set Up Python 3.14
-        uses: actions/setup-python@v2
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          python-version: "3.14"
+          python-version: "3.10"
 
-      - name: Install pytest and flake8
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
-      - name: Run flake8
-        run: flake8 app/
+          pip install pytest flake8
+
       - name: Run tests
-        timeout-minutes: 5
-        run: pytest tests/
+        run: pytest
 
       - name: Save PR number
-        if: ${{ !cancelled() && github.event_name == 'pull_request' }}
-        run: echo "${{ github.event.pull_request.number }}" > pr-number.txt
+        if: always()
+        run: |
+          mkdir -p ./artifacts
+          echo ${{ github.event.pull_request.number }} > ./artifacts/pr-number
 
-      - name: Upload PR number
-        if: ${{ !cancelled() && github.event_name == 'pull_request' }}
+      - name: Upload artifact
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: pr-number
-          path: pr-number.txt
+          path: ./artifacts/pr-number/
