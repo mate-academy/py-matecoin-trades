@@ -17,7 +17,7 @@ def calculate_profit(trades_json: str) -> None:
             matecoin_account += bought
             earned_money -= bought * matecoin_price
 
-
+        if trade["sold"] is not None:
             sold = Decimal(trade["sold"])
             matecoin_account -= sold
             earned_money += sold * matecoin_price
